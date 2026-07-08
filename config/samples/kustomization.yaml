@@ -1,0 +1,4 @@
+resources:
+- mispinstance-full.yaml
+- mispinstance-minimal.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

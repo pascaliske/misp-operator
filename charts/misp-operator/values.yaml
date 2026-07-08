@@ -1,0 +1,121 @@
+image:
+  # -- The registry to pull the image from.
+  registry: ghcr.io
+  # -- The repository to pull the image from.
+  repository: pascaliske/misp-operator
+  # -- The image tag, if left empty chart's appVersion will be used.
+  # @default -- `.Chart.AppVersion`
+  tag: ''
+  # -- The pull policy for the controller.
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+# Overriding the chart name and namespace
+nameOverride: ''
+fullnameOverride: ''
+namespaceOverride: ''
+
+crds:
+  # -- Specifies whether the CRDs should be created when installing the chart.
+  create: true
+
+controller:
+  # -- The number of replicas.
+  replicas: 1
+  # -- The controller update strategy. Currently only applies to controllers of kind `Deployment`.
+  updateStrategy: {}
+  # -- Additional annotations for the controller object.
+  annotations: {}
+  # -- Additional labels for the controller object.
+  labels: {}
+
+# -- Additional arguments to be added to the operator's args list.
+extraArgs: []
+
+serviceAccount:
+  # -- Create a `ServiceAccount` object.
+  create: true
+  # -- Specify the service account used for the controller.
+  name: ''
+  # -- Automatically mount the ServiceAccount API credentials
+  automount: true
+  # -- Additional annotations for the role and role binding objects.
+  annotations: {}
+  # -- Additional labels for the role and role binding objects.
+  labels: {}
+
+rbac:
+  # -- Specifies whether ClusterRole and ClusterRoleBinding should be created.
+  create: true
+
+metrics:
+  # -- Enable operator internal metrics. Prometheus must be installed in the cluster
+  enabled: true
+  serviceMonitor:
+    # -- Create a service monitor for Prometheus operator.
+    enabled: true
+    # -- How frequently the exporter should be scraped.
+    interval: 30s
+    # -- Timeout value for individual scrapes.
+    timeout: 10s
+    # -- Additional annotations for the service monitor object.
+    annotations: {}
+    # -- Additional labels for the service monitor object.
+    labels: {}
+
+# -- Optional priority class name indicates the importance of a pod relative to other pods.
+priorityClassName: ''
+
+# -- Container-level security attributes. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context).
+securityContext:
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+
+# -- Pod-level security attributes. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context).
+podSecurityContext:
+  runAsNonRoot: true
+  runAsGroup: 65532
+  runAsUser: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- Annotations to be added to the pod.
+podAnnotations: {}
+
+# -- Labels to be added to the pod.
+podLabels: {}
+
+# -- Compute resources used by the container. More info [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+resources:
+  limits:
+    cpu: 250m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+# -- Pod-level affinity. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).
+affinity: {}
+  # nodeAffinity:
+  #   requiredDuringSchedulingIgnoredDuringExecution:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #           - key: kubernetes.io/hostname
+  #             operator: In
+  #             values:
+  #               - my-node-xyz
+
+# -- Pod-level tolerations. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).
+tolerations: []
+  # - key: node-role.kubernetes.io/control-plane
+  #   operator: Exists
+  #   effect: NoSchedule
+
+# -- Pod-level node selector. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).
+nodeSelector: {}
+  # label: value

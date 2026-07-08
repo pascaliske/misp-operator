@@ -1,0 +1,4 @@
+{{- if .Values.rbac.create }}
+---
+{{- tpl (.Files.Get "files/generated-rbac.yaml") . }}
+{{- end }}

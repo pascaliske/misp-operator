@@ -1,0 +1,102 @@
+---
+apiVersion: misp.k8s.pascaliske.dev/v1alpha1
+kind: MispInstance
+metadata:
+  name: misp-full
+  labels:
+    app.kubernetes.io/name: misp-operator
+    app.kubernetes.io/managed-by: kustomize
+spec:
+  # operator
+  suspend: false
+
+  # general
+  image: ghcr.io/misp/misp-docker/misp-core:v2.5.44
+  # imagePullPolicy: IfNotPresent
+  # imagePullSecrets:
+  #   - name: my-registry-auth
+  baseUrl: http://localhost:8080
+  # uuid: 12345678-abcd-abcd-abcd-ab1234567890
+  timeZone: Europe/Berlin
+
+  # admin
+  admin:
+    organisation:
+      name: Admin Org
+      # uuid: 12345678-abcd-abcd-abcd-ab1234567890
+    credentialsSecretRef:
+      name: misp-custom-admin
+
+  # storage
+  storage:
+    size: 20Gi
+    # storageClass:
+    # pvcTemplate:
+
+  # storage
+  database:
+    host: mariadb
+    port: 3306
+    name: misp
+    credentialsSecretRef:
+      name: mariadb-user
+  cache:
+    host: redis
+    port: 6379
+    # enableEmptyPassword: true
+    passwordSecretRef:
+      name: redis-user
+
+  # nginx
+  nginx:
+    image: ghcr.io/misp/misp-docker/misp-nginx:v2.5.44
+    clientMaxBodySize: 100M
+    forwardedHeaders:
+      enabled: true
+      trustedProxies:
+        - 127.0.0.1
+    securityHeaders:
+      frameOptions: SAMEORIGIN
+      # contentSecurityPolicy: frame-src 'self';
+      # hstsMaxAge: 600
+    fastcgi:
+      readTimeout: 300s
+      sendTimeout: 300s
+      connectTimeout: 300s
+
+  # oidc
+  oidc:
+    enabled: true
+    credentialsSecretRef:
+      name: openid-client-credentials
+    settings:
+      method: ClientSecretBasic
+      scopes:
+        - profile
+        - email
+      defaultOrg: Admin Org
+      rolesMapping:
+        misp-admins: 1
+        misp-users: 3
+      offlineAccess: true
+      mixedAuth: true
+      allowEmailLinking: false
+      requireEmailVerified: true
+      disableRequestObject: false
+      disablePushedAuthorizationRequest: false
+
+  # email
+  email:
+    smtp:
+      host: mailpit.mailpit.svc.cluster.local
+      port: 1025
+
+  # optional components
+  modules:
+    enabled: true
+    image: ghcr.io/misp/misp-docker/misp-modules:v3.0.9
+
+  # additional env vars
+  extraEnvs:
+    - name: PYTHONUNBUFFERED
+      value: '1'

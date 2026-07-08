@@ -1,0 +1,21 @@
+---
+apiVersion: misp.k8s.pascaliske.dev/v1alpha1
+kind: MispInstance
+metadata:
+  name: misp-minimal
+spec:
+  # operator
+  suspend: false
+
+  # general
+  baseUrl: http://localhost:8080
+
+  # storage
+  database:
+    host: mariadb
+    credentialsSecretRef:
+      name: mariadb-user
+  cache:
+    host: redis
+    passwordSecretRef:
+      name: redis-user

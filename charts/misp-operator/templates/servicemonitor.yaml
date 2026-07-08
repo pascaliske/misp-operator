@@ -1,0 +1,33 @@
+{{- if and .Values.metrics.enabled .Values.metrics.serviceMonitor.enabled (.Capabilities.APIVersions.Has "monitoring.coreos.com/v1") -}}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "misp-operator.fullname" . }}
+  namespace: {{ include "misp-operator.namespace" . }}
+  labels:
+    {{- include "misp-operator.labels" . | nindent 4 }}
+    {{- with .Values.metrics.serviceMonitor.labels }}
+    {{ toYaml . | indent 4 }}
+    {{- end }}
+  {{- with .Values.metrics.serviceMonitor.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  endpoints:
+    - port: metrics
+      path: /metrics
+      {{- if $.Values.metrics.serviceMonitor.interval }}
+      interval: {{ $.Values.metrics.serviceMonitor.interval }}
+      {{- end }}
+      {{- if $.Values.metrics.serviceMonitor.timeout }}
+      scrapeTimeout: {{ $.Values.metrics.serviceMonitor.timeout }}
+      {{- end }}
+  jobLabel: {{ include "misp-operator.fullname" . }}
+  namespaceSelector:
+    matchNames:
+      - {{ include "misp-operator.namespace" . }}
+  selector:
+    matchLabels:
+      {{- include "misp-operator.selectorLabels" . | nindent 6 }}
+{{- end }}

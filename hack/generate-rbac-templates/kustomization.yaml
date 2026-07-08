@@ -1,0 +1,18 @@
+---
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namePrefix: '{{ include "misp-operator.fullname" . }}-'
+namespace: '{{ include "misp-operator.namespace" . }}'
+resources:
+  - ../../config/rbac
+patches:
+  - target:
+      kind: (RoleBinding|ClusterRoleBinding)
+    patch: |-
+      - op: replace
+        path: /subjects/0/name
+        value: '{{ include "misp-operator.serviceAccountName" . }}'
+      - op: replace
+        path: /subjects/0/namespace
+        value: '{{ include "misp-operator.namespace" . }}'

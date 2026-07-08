@@ -1,0 +1,18 @@
+{{- if .Values.metrics.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "misp-operator.fullname" . }}-metrics
+  namespace: {{ include "misp-operator.namespace" . }}
+  labels:
+    {{- include "misp-operator.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: metrics
+      port: 9081
+      targetPort: metrics
+      protocol: TCP
+  selector:
+    {{- include "misp-operator.selectorLabels" . | nindent 4 }}
+{{- end }}

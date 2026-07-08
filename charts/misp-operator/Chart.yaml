@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://json.schemastore.org/chart.json
+apiVersion: v2
+type: application
+name: misp-operator
+description: Helm chart for MISP-Operator - an operator for simplified deployments of MISP at scale
+version: 0.0.1
+appVersion: '0.0.1'
+
+home: https://github.com/pascaliske/misp-operator
+sources:
+  - https://github.com/pascaliske/misp-operator
+  - https://github.com/misp/misp-docker
+  - https://github.com/misp/misp
+keywords:
+  - misp
+maintainers:
+  - name: pascaliske
+    email: info@pascaliske.dev
+    url: https://pascaliske.dev
+
+dependencies: []
+
+annotations:
+  # possible kinds: added, changed, deprecated, removed, fixed, security
+  artifacthub.io/changes: |
+    - kind: added
+      description: 'Initial implementation of the MISP-Operator.'

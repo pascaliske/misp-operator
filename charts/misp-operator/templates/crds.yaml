@@ -1,0 +1,4 @@
+{{- if .Values.crds.create }}
+---
+{{- tpl (.Files.Get "files/generated-crds.yaml") . }}
+{{- end }}

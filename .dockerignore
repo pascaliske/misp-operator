@@ -1,0 +1,10 @@
+# ignore everything by default and re-include only needed files
+**
+
+# re-include go source files (but not *_test.go)
+!**/*.go
+**/*_test.go
+
+# re-include go module files
+!go.mod
+!go.sum
