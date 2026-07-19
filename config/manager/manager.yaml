@@ -43,6 +43,7 @@ spec:
             - containerPort: 9080
               name: health
               protocol: TCP
+          volumeMounts: []
           securityContext:
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
@@ -69,6 +70,7 @@ spec:
             requests:
               cpu: 100m
               memory: 128Mi
+      volumes: []
       securityContext:
         runAsNonRoot: true
         runAsGroup: 65532
