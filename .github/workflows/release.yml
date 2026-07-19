@@ -75,6 +75,13 @@ jobs:
       contents: read
       packages: write
     steps:
+      - name: Prepare chart version
+        id: version
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
@@ -90,7 +97,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Package Helm Chart
-        run: helm package charts/misp-operator --version "${{ github.ref_name }}" --app-version "${{ github.ref_name }}"
+        run: helm package charts/misp-operator --version "${{ steps.version.outputs.version }}" --app-version "${{ steps.version.outputs.version }}"
 
       - name: Push Helm Chart
         run: helm push misp-operator-*.tgz oci://ghcr.io/${{ github.repository }}/charts
