@@ -28,14 +28,15 @@ jobs:
           manifest-file: .release-please-manifest.json
           token: '${{ secrets.RELEASE_PLEASE_TOKEN }}'
 
-      - name: Generate installer manifest
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         if: ${{ steps.release.outputs.release_created }}
-        run: |
-          make build-installer IMG=ghcr.io/pascaliske/misp-operator:${{ steps.release.outputs.tag_name }}
+        with:
+          persist-credentials: false
 
-      - name: Upload installer manifest
+      - name: Publish installer manifest
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          make build-installer IMG=ghcr.io/pascaliske/misp-operator:${{ steps.release.outputs.tag_name }}
           gh release upload ${{ steps.release.outputs.tag_name }} ./dist/install.yaml
