@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.5](https://github.com/pascaliske/misp-operator/compare/v0.0.4...v0.0.5) (2026-07-20)
+
+
+### Bug Fixes
+
+* **ci:** add missing cosign installer action to chart release job ([ac1150f](https://github.com/pascaliske/misp-operator/commit/ac1150fad686eb69608c9a4bad507f03636d90a1))
+
 ## [0.0.4](https://github.com/pascaliske/misp-operator/compare/v0.0.3...v0.0.4) (2026-07-20)
 
 
