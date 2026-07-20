@@ -21,6 +21,13 @@ jobs:
       packages: write
       id-token: write
     steps:
+      - name: Prepare version
+        id: version
+        shell: bash
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
@@ -71,7 +78,7 @@ jobs:
       - name: Sign built image
         if: github.event_name != 'pull_request'
         run: |
-          cosign sign --yes ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
+          cosign sign --yes --annotations "tag=${{ steps.version.outputs.version }}" ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
 
       - name: Output image digest
         if: github.event_name != 'pull_request'
@@ -86,7 +93,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - name: Prepare chart version
+      - name: Prepare version
         id: version
         shell: bash
         run: |
@@ -119,4 +126,4 @@ jobs:
 
       - name: Sign packaged chart
         run: |
-          cosign sign --yes ghcr.io/${{ github.repository_owner }}/charts/misp-operator@${{ steps.push.outputs.digest }}
+          cosign sign --yes --annotations "tag=${{ steps.version.outputs.version }}" ghcr.io/${{ github.repository_owner }}/charts/misp-operator@${{ steps.push.outputs.digest }}
