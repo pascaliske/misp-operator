@@ -268,6 +268,8 @@ HELM_NAMESPACE ?= misp-operator-system
 HELM_RELEASE ?= misp-operator
 ## Path to the Helm chart directory
 HELM_CHART_DIR ?= charts/misp-operator
+## Path to the generated files directory for the Helm chart
+HELM_CHART_FILES ?= charts/misp-operator/files
 ## Additional arguments to pass to helm commands
 HELM_EXTRA_ARGS ?=
 
@@ -302,3 +304,9 @@ helm-history: ## Show Helm release history.
 .PHONY: helm-rollback
 helm-rollback: ## Rollback to previous Helm release.
 	$(HELM) rollback $(HELM_RELEASE) --namespace $(HELM_NAMESPACE)
+
+.PHONY: helm-generate-files
+helm-generate-files: kustomize ## Generate files for Helm chart.
+	mkdir -p $(HELM_CHART_FILES)
+	"$(KUSTOMIZE)" build hack/generate-rbac-templates | yq 'select(.kind != "ServiceAccount")' > $(HELM_CHART_FILES)/generated-rbac.yaml
+	"$(KUSTOMIZE)" build config/crd > $(HELM_CHART_FILES)/generated-crds.yaml

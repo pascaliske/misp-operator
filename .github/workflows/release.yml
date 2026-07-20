@@ -116,6 +116,7 @@ jobs:
 
       - name: Package Helm Chart
         run: |
+          make helm-generate-files
           helm package charts/misp-operator --version "${{ steps.version.outputs.version }}" --app-version "${{ steps.version.outputs.version }}"
 
       - name: Push Helm Chart
