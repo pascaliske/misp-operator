@@ -19,6 +19,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      id-token: write
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
@@ -32,6 +33,8 @@ jobs:
         id: buildx
         with:
           version: latest
+
+      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6 # v4.1.2
 
       - uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         id: metadata
@@ -65,7 +68,13 @@ jobs:
           provenance: mode=max
           sbom: true
 
+      - name: Sign built image
+        if: github.event_name != 'pull_request'
+        run: |
+          cosign sign --yes ghcr.io/${{ github.repository }}@${{ steps.build.outputs.digest }}
+
       - name: Output image digest
+        if: github.event_name != 'pull_request'
         run: |
           echo ${{ steps.build.outputs.digest }}
 
