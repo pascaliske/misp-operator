@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.4](https://github.com/pascaliske/misp-operator/compare/v0.0.3...v0.0.4) (2026-07-20)
+
+
+### Bug Fixes
+
+* **ci:** add version tag as annotation to cosign signature ([5628a34](https://github.com/pascaliske/misp-operator/commit/5628a349c062121bf131dc5dbdfd49991c8b83ed))
+* **ci:** ensure helm files are generated before packaging chart ([352ff27](https://github.com/pascaliske/misp-operator/commit/352ff27c9b4bcb15f76638c225a4f508f5550b42))
+* **ci:** upload installer to draft release before finalization ([d3d5b30](https://github.com/pascaliske/misp-operator/commit/d3d5b30e7f2456b66659e45fcb0aaa3403835cef))
+
 ## [0.0.3](https://github.com/pascaliske/misp-operator/compare/v0.0.2...v0.0.3) (2026-07-20)
 
 
