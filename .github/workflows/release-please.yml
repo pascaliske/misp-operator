@@ -33,10 +33,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Publish installer manifest
+      - name: Publish installer manifest & finalize release
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           make build-installer IMG=ghcr.io/pascaliske/misp-operator:${{ steps.release.outputs.tag_name }}
           gh release upload ${{ steps.release.outputs.tag_name }} ./dist/install.yaml
+          gh release edit ${{ steps.release.outputs.tag_name }} --draft=false
