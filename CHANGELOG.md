@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.6](https://github.com/pascaliske/misp-operator/compare/v0.0.5...v0.0.6) (2026-07-20)
+
+
+### Bug Fixes
+
+* **ci:** add missing id-token permission for signing the chart ([8876adc](https://github.com/pascaliske/misp-operator/commit/8876adcc039b3b0e7b52f714693754c56b20e555))
+
 ## [0.0.5](https://github.com/pascaliske/misp-operator/compare/v0.0.4...v0.0.5) (2026-07-20)
 
 
