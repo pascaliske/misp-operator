@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.0.7](https://github.com/pascaliske/misp-operator/compare/v0.0.6...v0.0.7) (2026-07-21)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.32.0 ([2e2d980](https://github.com/pascaliske/misp-operator/commit/2e2d9805cc9b479f5e9eb667aca8065c65cd7d89))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.32.0 ([c3cd749](https://github.com/pascaliske/misp-operator/commit/c3cd7498d654c0b5d667b38a6595651c860bf88b))
+* **deps:** update module github.com/onsi/gomega to v1.42.1 ([49915ee](https://github.com/pascaliske/misp-operator/commit/49915ee11a2c2f0cef4302b6c0ae8b10ecf6519d))
+* **deps:** update module github.com/onsi/gomega to v1.42.1 ([de5c237](https://github.com/pascaliske/misp-operator/commit/de5c2376624a230f588e31e0181d14f60e3c8465))
+
 ## [0.0.6](https://github.com/pascaliske/misp-operator/compare/v0.0.5...v0.0.6) (2026-07-20)
 
 
