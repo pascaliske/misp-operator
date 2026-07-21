@@ -23,6 +23,7 @@ import (
 	"reflect"
 
 	mispv1alpha1 "github.com/pascaliske/misp-operator/api/v1alpha1"
+	"github.com/pascaliske/misp-operator/internal/utils"
 
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -30,19 +31,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 )
-
-func isRolloutPending(deploy appsv1.Deployment) bool {
-	// fetch desired replicas
-	replicas := int32(1)
-	if deploy.Spec.Replicas != nil {
-		replicas = *deploy.Spec.Replicas
-	}
-
-	return deploy.Status.ObservedGeneration < deploy.Generation ||
-		deploy.Status.Replicas != replicas ||
-		deploy.Status.UpdatedReplicas != replicas ||
-		deploy.Status.AvailableReplicas != replicas
-}
 
 func (r *MispInstanceReconciler) updateStatus(ctx context.Context, mispInstance *mispv1alpha1.MispInstance) error {
 	logger := log.FromContext(ctx)
@@ -65,7 +53,7 @@ func (r *MispInstanceReconciler) updateStatus(ctx context.Context, mispInstance 
 	if mispInstance.Spec.Suspend {
 		mispInstance.Status.Phase = mispv1alpha1.PhaseSuspended
 		mispInstance.Status.Message = "Reconciliation is suspended."
-	} else if isRolloutPending(deploy) {
+	} else if utils.IsRolloutPending(deploy) {
 		mispInstance.Status.Phase = mispv1alpha1.PhasePending
 		mispInstance.Status.Message = "MispInstance is pending."
 	} else {
