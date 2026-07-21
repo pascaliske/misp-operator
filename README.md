@@ -70,11 +70,7 @@ You can find more examples in the [config/samples](config/samples/) directory.
 
 ## Contributing
 
-_TBD_
-
-**NOTE:** Run `make help` for more information on all potential `make` targets
-
-More information can be found via the [Kubebuilder Documentation](https://book.kubebuilder.io/introduction.html)
+Contributions of any kind are welcome! Please see the [contribution guide](CONTRIBUTING.md) for details.
 
 ## License
 
