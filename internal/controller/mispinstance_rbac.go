@@ -46,9 +46,9 @@ func (r *MispInstanceReconciler) createInstanceServiceAccount(mispInstance *misp
 		WithAutomountServiceAccountToken(false)
 }
 
-func (r *MispInstanceReconciler) createModulesServiceAccount(mispInstance *mispv1alpha1.MispInstance) *corev1apply.ServiceAccountApplyConfiguration {
+func (r *MispInstanceReconciler) createAdditionalServiceAccount(mispInstance *mispv1alpha1.MispInstance, suffix string) *corev1apply.ServiceAccountApplyConfiguration {
 	return corev1apply.
-		ServiceAccount(mispInstance.GetNameWithSuffix("modules"), mispInstance.Namespace).
+		ServiceAccount(mispInstance.GetNameWithSuffix(suffix), mispInstance.Namespace).
 		WithLabels(utils.BuildAppLabels(mispInstance.Name, utils.AppLabelComponentRbac)).
 		WithOwnerReferences(
 			metav1apply.
@@ -71,7 +71,7 @@ func (r *MispInstanceReconciler) reconcileServiceAccount(ctx context.Context, mi
 
 	// reconcile misp modules service account if enabled
 	if mispInstance.Spec.Modules != nil && mispInstance.Spec.Modules.Enabled {
-		if err := r.Apply(ctx, r.createModulesServiceAccount(mispInstance), options); err != nil {
+		if err := r.Apply(ctx, r.createAdditionalServiceAccount(mispInstance, "modules"), options); err != nil {
 			return err
 		}
 	}
