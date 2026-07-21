@@ -345,21 +345,6 @@ type MispInstanceList struct {
 	Items           []MispInstance `json:"items"`
 }
 
-// Phase constants for MispInstance
-const (
-	PhasePending   = "Pending"
-	PhaseRunning   = "Running"
-	PhaseFailed    = "Failed"
-	PhaseSuspended = "Suspended"
-)
-
-// Condition type constants for MispInstance
-const (
-	ConditionTypeReady       = "Ready"
-	ConditionTypeProgressing = "Progressing"
-	ConditionTypeDegraded    = "Degraded"
-)
-
 func init() {
 	SchemeBuilder.Register(func(s *runtime.Scheme) error {
 		s.AddKnownTypes(SchemeGroupVersion, &MispInstance{}, &MispInstanceList{})
