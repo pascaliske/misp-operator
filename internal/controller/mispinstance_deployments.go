@@ -818,7 +818,7 @@ func (r *MispInstanceReconciler) createModulesDeployment(mispInstance *mispv1alp
 
 func (r *MispInstanceReconciler) reconcileDeployments(ctx context.Context, mispInstance *mispv1alpha1.MispInstance) error {
 	options := &client.ApplyOptions{
-		FieldManager: applyFieldManagerKey,
+		FieldManager: applyFieldManagerKeyInstance,
 		Force:        new(true),
 	}
 

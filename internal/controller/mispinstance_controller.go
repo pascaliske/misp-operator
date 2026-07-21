@@ -37,7 +37,7 @@ import (
 	mispv1alpha1 "github.com/pascaliske/misp-operator/api/v1alpha1"
 )
 
-const applyFieldManagerKey string = "mispinstance-controller"
+const applyFieldManagerKeyInstance string = "mispinstance-controller"
 
 // MispInstanceReconciler reconciles a MispInstance object
 type MispInstanceReconciler struct {

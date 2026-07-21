@@ -102,7 +102,7 @@ func (r *MispInstanceReconciler) reconcilePersistentVolumeClaim(ctx context.Cont
 	pvc := r.createPersistentVolumeClaim(mispInstance)
 
 	return r.Apply(ctx, pvc, &client.ApplyOptions{
-		FieldManager: applyFieldManagerKey,
+		FieldManager: applyFieldManagerKeyInstance,
 		Force:        new(true),
 	})
 }

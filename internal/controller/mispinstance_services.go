@@ -90,7 +90,7 @@ func (r *MispInstanceReconciler) createModulesService(mispInstance *mispv1alpha1
 
 func (r *MispInstanceReconciler) reconcileServices(ctx context.Context, mispInstance *mispv1alpha1.MispInstance) error {
 	options := &client.ApplyOptions{
-		FieldManager: applyFieldManagerKey,
+		FieldManager: applyFieldManagerKeyInstance,
 		Force:        new(true),
 	}
 

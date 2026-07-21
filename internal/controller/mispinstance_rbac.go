@@ -65,7 +65,7 @@ func (r *MispInstanceReconciler) createModulesServiceAccount(mispInstance *mispv
 
 func (r *MispInstanceReconciler) reconcileServiceAccount(ctx context.Context, mispInstance *mispv1alpha1.MispInstance) error {
 	options := &client.ApplyOptions{
-		FieldManager: applyFieldManagerKey,
+		FieldManager: applyFieldManagerKeyInstance,
 		Force:        new(true),
 	}
 

@@ -71,7 +71,7 @@ func (r *MispInstanceReconciler) reconcileAdminSecret(ctx context.Context, mispI
 	})
 
 	return r.Apply(ctx, secret, &client.ApplyOptions{
-		FieldManager: applyFieldManagerKey,
+		FieldManager: applyFieldManagerKeyInstance,
 		Force:        new(true),
 	})
 }
