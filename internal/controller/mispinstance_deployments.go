@@ -805,7 +805,7 @@ func (r *MispInstanceReconciler) createModulesDeployment(mispInstance *mispv1alp
 		WithSpec(
 			appsv1apply.
 				DeploymentSpec().
-				WithStrategy(appsv1apply.DeploymentStrategy().WithType(appsv1.RecreateDeploymentStrategyType)).
+				WithStrategy(appsv1apply.DeploymentStrategy().WithType(appsv1.RollingUpdateDeploymentStrategyType)).
 				WithSelector(metav1apply.LabelSelector().WithMatchLabels(utils.BuildSelectorLabels(mispInstance.Name, utils.AppLabelComponentModules))).
 				WithTemplate(
 					corev1apply.
