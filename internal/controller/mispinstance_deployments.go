@@ -337,7 +337,7 @@ func (r *MispInstanceReconciler) createCoreContainer(mispInstance *mispv1alpha1.
 			corev1apply.
 				EnvVar().
 				WithName("MISP_MODULES_FQDN").
-				WithValue(fmt.Sprintf("http://%s-modules", mispInstance.Name)),
+				WithValue(fmt.Sprintf("http://%s", mispInstance.GetNameWithSuffix("modules"))),
 		)
 	}
 
