@@ -19,7 +19,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 package v1alpha1
 
 import (
-	"github.com/pascaliske/misp-operator/internal/controller/oidc"
+	"github.com/pascaliske/misp-operator/internal/oidc"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
