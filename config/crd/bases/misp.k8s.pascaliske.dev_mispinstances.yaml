@@ -52,11 +52,11 @@ spec:
             description: spec defines the desired state of MispInstance
             properties:
               admin:
+                description: Optional admin account configuration
                 properties:
                   credentialsSecretRef:
-                    description: |-
-                      LocalObjectReference contains enough information to let you locate the
-                      referenced object inside the same namespace.
+                    description: Provide a secret in the same namespace with custom
+                      admin credentials
                     properties:
                       name:
                         default: ""
@@ -70,27 +70,35 @@ spec:
                     type: object
                     x-kubernetes-map-type: atomic
                   organisation:
+                    description: Optionally customize the initial admin organisation
                     properties:
                       name:
+                        description: Customize the initial organisations name
                         type: string
                       uuid:
+                        description: Pre-fill the initial organisations UUID
                         type: string
                     type: object
                 type: object
               baseUrl:
+                description: Provide the front-facing url of the instance
                 minLength: 1
                 type: string
               cache:
+                description: Provide your k/v based cache connection details - e.g.
+                  valkey or redis
                 properties:
                   enableEmptyPassword:
                     default: false
+                    description: Explicitly disable the use of a password - this is
+                      not recommended for production setups
                     type: boolean
                   host:
+                    description: Host address of the cache
                     type: string
                   passwordSecretRef:
-                    description: |-
-                      LocalObjectReference contains enough information to let you locate the
-                      referenced object inside the same namespace.
+                    description: Reference a Kubernetes secret in the same namespace
+                      containing the password
                     properties:
                       name:
                         default: ""
@@ -105,17 +113,18 @@ spec:
                     x-kubernetes-map-type: atomic
                   port:
                     default: 6379
+                    description: Port the cache is listening on - defaults to "6379"
                     format: int32
                     maximum: 65535
                     minimum: 1
                     type: integer
                 type: object
               database:
+                description: Provide your database connection details
                 properties:
                   credentialsSecretRef:
-                    description: |-
-                      LocalObjectReference contains enough information to let you locate the
-                      referenced object inside the same namespace.
+                    description: Reference a Kubernetes secret in the same namespace
+                      containing the database credentials
                     properties:
                       name:
                         default: ""
@@ -129,12 +138,16 @@ spec:
                     type: object
                     x-kubernetes-map-type: atomic
                   host:
+                    description: Host address of the database
                     type: string
                   name:
                     default: misp
+                    description: Name of the database for the instance - defaults
+                      to "misp"
                     type: string
                   port:
                     default: 3306
+                    description: Port the database is listening on - defaults to "3306"
                     format: int32
                     maximum: 65535
                     minimum: 1
@@ -143,13 +156,17 @@ spec:
                 - credentialsSecretRef
                 type: object
               email:
+                description: Configure optional email notification settings
                 properties:
                   smtp:
+                    description: Configure SMTP settings for email notifications
                     properties:
                       host:
+                        description: Provide SMTP host address
                         type: string
                       port:
                         default: 25
+                        description: Provide SMTP port number
                         format: int32
                         maximum: 65535
                         minimum: 1
@@ -161,6 +178,7 @@ spec:
                   rule: '[has(self.smtp)].filter(x,x==true).size() >= 1'
               extraEnvs:
                 default: []
+                description: Provide extra environment variables for the core container
                 items:
                   description: EnvVar represents an environment variable present in
                     a Container.
@@ -317,13 +335,16 @@ spec:
                   type: object
                 type: array
               image:
+                description: Override the core image of the instance - defaults to
+                  ghcr.io/misp/misp-docker/misp-core
                 type: string
               imagePullPolicy:
                 default: IfNotPresent
-                description: PullPolicy describes a policy for if/when to pull a container
-                  image
+                description: Override the image pull policy for the core image - defaults
+                  to "IfNotPresent"
                 type: string
               imagePullSecrets:
+                description: Provide image pull secrets for the core image
                 items:
                   description: |-
                     LocalObjectReference contains enough information to let you locate the
@@ -342,58 +363,80 @@ spec:
                   x-kubernetes-map-type: atomic
                 type: array
               modules:
+                description: Optional modules component
                 properties:
                   enabled:
                     default: true
+                    description: Enable optional modules component
                     type: boolean
                   image:
+                    description: Override the modules image - defaults to ghcr.io/misp/misp-docker/misp-modules
                     minLength: 1
                     type: string
                 required:
                 - image
                 type: object
               nginx:
+                description: Optional nginx configuration
                 properties:
                   clientMaxBodySize:
                     default: 50M
+                    description: Customize the max client body size of nginx
                     type: string
                   fastcgi:
+                    description: Customize FastCGI settings
                     properties:
                       connectTimeout:
                         default: 300s
+                        description: Customize the FastCGI connect timeout - defaults
+                          to "300s"
                         type: string
                       readTimeout:
                         default: 300s
+                        description: Customize the FastCGI read timeout - defaults
+                          to "300s"
                         type: string
                       sendTimeout:
                         default: 300s
+                        description: Customize the FastCGI send timeout - defaults
+                          to "300s"
                         type: string
                     type: object
                   forwardedHeaders:
+                    description: Configure forwarded headers
                     properties:
                       enabled:
                         default: false
+                        description: Enable the usage of forwarded for headers
                         type: boolean
                       trustedProxies:
                         default: []
+                        description: Configure the list of trusted proxies
                         items:
                           type: string
                         type: array
                     type: object
                   image:
+                    description: Override the nginx image - defaults to ghcr.io/misp/misp-docker/misp-nginx
                     minLength: 1
                     type: string
                   securityHeaders:
+                    description: Configure security headers
                     properties:
                       contentSecurityPolicy:
+                        description: Customize the value of the Content-Security-Policy
+                          header
                         type: string
                       frameOptions:
                         default: SAMEORIGIN
+                        description: Customize the value of the X-Frame-Options header
                         enum:
                         - DENY
                         - SAMEORIGIN
                         type: string
                       hstsMaxAge:
+                        description: Customize the value of the Strict-Transport-Security
+                          header
                         format: int32
                         minimum: 0
                         type: integer
@@ -402,11 +445,10 @@ spec:
                 - image
                 type: object
               oidc:
+                description: Configure optional OIDC auth settings
                 properties:
                   credentialsSecretRef:
-                    description: |-
-                      LocalObjectReference contains enough information to let you locate the
-                      referenced object inside the same namespace.
+                    description: Provide OIDC client credentials
                     properties:
                       name:
                         default: ""
@@ -421,22 +463,34 @@ spec:
                     x-kubernetes-map-type: atomic
                   enabled:
                     default: false
+                    description: Enable OIDC auth mode
                     type: boolean
                   settings:
+                    description: Override default OIDC settings
                     properties:
                       allowEmailLinking:
                         default: false
+                        description: Allow linking of existing users by email to OIDC
+                          - defaults to "false"
                         type: boolean
                       defaultOrg:
+                        description: Specify the default organisation for authenticated
+                          users
                         type: string
                       disablePushedAuthorizationRequest:
                         default: false
+                        description: Disable the use of pushed authorization request
+                          - defaults to "false"
                         type: boolean
                       disableRequestObject:
                         default: false
+                        description: Disable the use of the request object approach
+                          in authorization requests - defaults to "false"
                         type: boolean
                       method:
                         default: ClientSecretBasic
+                        description: Specify the client authentication method to use
+                          - defaults to "ClientSecretBasic"
                         enum:
                         - ClientSecretBasic
                         - ClientSecretPost
@@ -445,25 +499,36 @@ spec:
                         type: string
                       mixedAuth:
                         default: true
+                        description: Allow both OIDC authentication and password authentication
+                          - defaults to "true"
                         type: boolean
                       offlineAccess:
                         default: true
+                        description: Enable request of offline access tokens - defaults
+                          to "true"
                         type: boolean
                       requireEmailVerified:
                         default: true
+                        description: Require `email_verified` token claim to be true
+                          - defaults to "true"
                         type: boolean
                       rolesMapping:
                         additionalProperties:
                           type: integer
                         default: {}
+                        description: Specify a JSON mapping from OIDC roles to MISP
+                          role IDs
                         type: object
                       rolesProperty:
                         default: roles
+                        description: Specify the token claim which contains the user
+                          roles - defaults to "roles"
                         type: string
                       scopes:
                         default:
                         - profile
                         - email
+                        description: Request additional scopes from the Id
                         items:
                           type: string
                         type: array
@@ -472,11 +537,12 @@ spec:
                 - credentialsSecretRef
                 type: object
               storage:
+                description: Optional storage configuration - defaults to a 10Gi PVC
+                  with default storage class name
                 properties:
                   pvcTemplate:
-                    description: |-
-                      PersistentVolumeClaimSpec describes the common attributes of storage devices
-                      and allows a Source for provider-specific attributes
+                    description: Optionally provide your own PVC template - see here
+                      https://kubernetes.io/docs/reference/kubernetes-api/core/persistent-volume-claim-v1/#PersistentVolumeClaimSpec
                     properties:
                       accessModes:
                         description: |-
@@ -671,18 +737,25 @@ spec:
                         type: string
                     type: object
                   size:
+                    description: Customize the storage size of the PVC
                     type: string
                   storageClass:
+                    description: Explicitly configure a storage class name for the
+                      PVC
                     type: string
                 type: object
               suspend:
                 default: false
+                description: Suspend reconciliation of this resource through the operator
                 type: boolean
               timeZone:
                 default: Etc/UTC
+                description: Override the time zone of the containers
                 minLength: 1
                 type: string
               uuid:
+                description: Pre-fill the instance UUID - defaults to an auto generated
+                  one
                 minLength: 1
                 type: string
             required:

@@ -16,6 +16,7 @@ It builds upon the images from the [misp/misp-docker](https://github.com/misp/mi
 > cp template.env .env
 > docker compose build misp-core misp-nginx
 > ```
+>
 > Don't forget to load the images into your environment (`ctr -n k8s.io images import` / `kind load docker-image`).
 
 ## Features
@@ -76,7 +77,7 @@ spec:
       name: redis-user
 ```
 
-You can find more examples in the [config/samples](config/samples/) directory.
+You can find more examples in the [config/samples](config/samples/) directory. Basic documentation of the CRDs can also be viewed via [https://docs.crds.dev](https://doc.crds.dev/github.com/pascaliske/misp-operator).
 
 ## Contributing
 
