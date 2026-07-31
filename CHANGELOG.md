@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.0.7](https://github.com/pascaliske/misp-operator/compare/v0.0.6...v0.0.7) (2026-07-31)
+
+
+### Features
+
+* provide basic crds documentation via https://doc.crds.dev ([b001a35](https://github.com/pascaliske/misp-operator/commit/b001a3589aa0120cacb53a0b9bb7d0a1c00c5a49))
+* switch update strategy of modules to rolling updates ([e174f36](https://github.com/pascaliske/misp-operator/commit/e174f36729de812981cb90aa7d4b0ce874f2bce8))
+
+
+### Bug Fixes
+
+* **deps:** update kubernetes monorepo to v0.36.3 ([e280262](https://github.com/pascaliske/misp-operator/commit/e28026248f19191cf7b8a089b98789d4822ed980))
+* **deps:** update kubernetes monorepo to v0.36.3 ([d6bc3bc](https://github.com/pascaliske/misp-operator/commit/d6bc3bc7f46b2527044df2780f384140b62c552a))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.32.0 ([2e2d980](https://github.com/pascaliske/misp-operator/commit/2e2d9805cc9b479f5e9eb667aca8065c65cd7d89))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.32.0 ([c3cd749](https://github.com/pascaliske/misp-operator/commit/c3cd7498d654c0b5d667b38a6595651c860bf88b))
+* **deps:** update module github.com/onsi/gomega to v1.42.1 ([49915ee](https://github.com/pascaliske/misp-operator/commit/49915ee11a2c2f0cef4302b6c0ae8b10ecf6519d))
+* **deps:** update module github.com/onsi/gomega to v1.42.1 ([de5c237](https://github.com/pascaliske/misp-operator/commit/de5c2376624a230f588e31e0181d14f60e3c8465))
+
 ## [0.0.6](https://github.com/pascaliske/misp-operator/compare/v0.0.5...v0.0.6) (2026-07-20)
 
 
