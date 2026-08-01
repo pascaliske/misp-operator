@@ -397,11 +397,11 @@ type MispInstance struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitzero"`
 
-	// spec defines the desired state of MispInstance
+	// Specification of the desired state of the MispInstance
 	// +required
 	Spec MispInstanceSpec `json:"spec"`
 
-	// status defines the observed state of MispInstance
+	// Most recently observed status of the MispInstance. This data may not be up to date. Populated by the system. Read-only.
 	// +optional
 	Status MispInstanceStatus `json:"status,omitzero"`
 }
