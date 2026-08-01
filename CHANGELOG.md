@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.0.8](https://github.com/pascaliske/misp-operator/compare/v0.0.7...v0.0.8) (2026-08-01)
+
+
+### Bug Fixes
+
+* ensure at least one of passwordSecretRef or enableEmptyPassword is set for cache ([9f30924](https://github.com/pascaliske/misp-operator/commit/9f3092458bc3ec07a64adb3b65ee309caa4689dc))
+* explicitly mark fields as required ([2df6383](https://github.com/pascaliske/misp-operator/commit/2df63839c74fd095769213f47212e8edcbfa5f0e))
+* update spec and status documentation comments ([f5a4a5e](https://github.com/pascaliske/misp-operator/commit/f5a4a5e7421b9a3338b411d44962bf88e14f4da9))
+
 ## [0.0.7](https://github.com/pascaliske/misp-operator/compare/v0.0.6...v0.0.7) (2026-07-31)
 
 
