@@ -3,8 +3,8 @@ apiVersion: v2
 type: application
 name: misp-operator
 description: Helm chart for MISP-Operator - an operator for simplified deployments of MISP at scale
-version: 0.0.1
-appVersion: '0.0.1'
+version: 0.0.0
+appVersion: '0.0.0'
 
 home: https://github.com/pascaliske/misp-operator
 sources:
