@@ -118,6 +118,8 @@ spec:
                     maximum: 65535
                     minimum: 1
                     type: integer
+                required:
+                - host
                 type: object
               database:
                 description: Provide your database connection details
@@ -154,6 +156,7 @@ spec:
                     type: integer
                 required:
                 - credentialsSecretRef
+                - host
                 type: object
               email:
                 description: Configure optional email notification settings

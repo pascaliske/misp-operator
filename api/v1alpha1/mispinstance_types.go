@@ -64,6 +64,7 @@ type Storage struct {
 
 type Database struct {
 	// Host address of the database
+	// +required
 	// +kubebuilder:validation:Type=string
 	Host string `json:"host,omitempty"`
 
@@ -80,11 +81,13 @@ type Database struct {
 	Name string `json:"name,omitempty"`
 
 	// Reference a Kubernetes secret in the same namespace containing the database credentials
+	// +required
 	CredentialsSecretRef corev1.LocalObjectReference `json:"credentialsSecretRef"`
 }
 
 type Cache struct {
 	// Host address of the cache
+	// +required
 	// +kubebuilder:validation:Type=string
 	Host string `json:"host,omitempty"`
 
@@ -300,6 +303,7 @@ type MispInstanceSpec struct {
 	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
 
 	// Provide the front-facing url of the instance
+	// +required
 	// +kubebuilder:validation:Type=string
 	// +kubebuilder:validation:MinLength=1
 	BaseUrl string `json:"baseUrl"`
@@ -326,9 +330,11 @@ type MispInstanceSpec struct {
 	Storage *Storage `json:"storage,omitempty"`
 
 	// Provide your database connection details
+	// +required
 	Database Database `json:"database"`
 
 	// Provide your k/v based cache connection details - e.g. valkey or redis
+	// +required
 	Cache Cache `json:"cache"`
 
 	// Optional nginx configuration
