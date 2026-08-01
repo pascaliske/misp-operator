@@ -59,8 +59,13 @@ var _ = Describe("MispInstance Controller", func() {
 					Spec: mispv1alpha1.MispInstanceSpec{
 						BaseUrl:  "http://localhost:8080",
 						TimeZone: "Europe/Berlin",
+						Database: mispv1alpha1.Database{
+							Host: "mariadb",
+						},
+						Cache: mispv1alpha1.Cache{
+							Host: "redis",
+						},
 					},
-					// TODO(user): Specify other spec details if needed.
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())
 			}
