@@ -121,6 +121,11 @@ spec:
                 required:
                 - host
                 type: object
+                x-kubernetes-validations:
+                - message: at least one of the fields in [passwordSecretRef enableEmptyPassword]
+                    must be set
+                  rule: '[has(self.passwordSecretRef),has(self.enableEmptyPassword)].filter(x,x==true).size()
+                    >= 1'
               database:
                 description: Provide your database connection details
                 properties:

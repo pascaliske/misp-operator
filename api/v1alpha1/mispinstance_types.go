@@ -85,6 +85,7 @@ type Database struct {
 	CredentialsSecretRef corev1.LocalObjectReference `json:"credentialsSecretRef"`
 }
 
+// +kubebuilder:validation:AtLeastOneOf=passwordSecretRef;enableEmptyPassword
 type Cache struct {
 	// Host address of the cache
 	// +required
