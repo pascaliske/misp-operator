@@ -77,7 +77,7 @@ spec:
       name: redis-user
 ```
 
-You can find more examples in the [config/samples](config/samples/) directory. Basic documentation of the CRDs can also be viewed via [https://docs.crds.dev](https://doc.crds.dev/github.com/pascaliske/misp-operator).
+You can find more examples in the [config/samples](config/samples/) directory. Basic documentation of the CRDs can also be viewed via [https://doc.crds.dev](https://doc.crds.dev/github.com/pascaliske/misp-operator).
 
 ## Contributing
 
