@@ -79,6 +79,26 @@ spec:
 
 You can find more examples in the [config/samples](config/samples/) directory. Basic documentation of the CRDs can also be viewed via [https://doc.crds.dev](https://doc.crds.dev/github.com/pascaliske/misp-operator).
 
+## Verification
+
+The OCI images of the operator and it's Helm chart are **keylessly** signed using [`cosign`](https://docs.sigstore.dev/cosign/verifying/verify/) and can be can be verified:
+
+```shell
+cosign verify ghcr.io/pascaliske/misp-operator:<version> \
+  --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+```shell
+cosign verify ghcr.io/pascaliske/charts/misp-operator:<version> \
+  --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+
+> [!NOTE]
+> Verification succeeds only if the artifact was signed by the GitHub Actions workflow in this repository.
+> Any modification of the artifact or signing from a different identity will cause verification to fail.
+
 ## Contributing
 
 Contributions of any kind are welcome! Please see the [contribution guide](CONTRIBUTING.md) for details.
