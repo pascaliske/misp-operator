@@ -83,17 +83,19 @@ You can find more examples in the [config/samples](config/samples/) directory. B
 
 The OCI images of the operator and it's Helm chart are **keylessly** signed using [`cosign`](https://docs.sigstore.dev/cosign/verifying/verify/) and can be can be verified:
 
+<!-- x-release-please-start-version -->
 ```shell
-cosign verify ghcr.io/pascaliske/misp-operator:<version> \
+cosign verify ghcr.io/pascaliske/misp-operator:0.0.0 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
 ```shell
-cosign verify ghcr.io/pascaliske/charts/misp-operator:<version> \
+cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.0 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
+<!-- x-release-please-end -->
 
 > [!NOTE]
 > Verification succeeds only if the artifact was signed by the GitHub Actions workflow in this repository.
