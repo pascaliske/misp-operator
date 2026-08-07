@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.9](https://github.com/pascaliske/misp-operator/compare/v0.0.8...v0.0.9) (2026-08-07)
+
+
+### Features
+
+* automatically update version number in README and Chart.yaml ([66200f9](https://github.com/pascaliske/misp-operator/commit/66200f932f49094581e0770c6c59eed35fd4d552))
+* **chart:** generate values documentarion using helm-docs ([aebddfb](https://github.com/pascaliske/misp-operator/commit/aebddfb373e2dbf6ab8544e656cd319f08faacb5))
+* **chart:** support extra volumes and extra volume mounts ([6ccfc0f](https://github.com/pascaliske/misp-operator/commit/6ccfc0fa3545a8308015d7bf619e29b78e39ceca))
+* refine misp instance watcher to exclude status only events ([c7b2bcc](https://github.com/pascaliske/misp-operator/commit/c7b2bcc0ad5baa63ae137a0d97eb048932e05450))
+
+
+### Bug Fixes
+
+* **chart:** setup webhook dependencies ([082a101](https://github.com/pascaliske/misp-operator/commit/082a101f329c05521a041641bb02a6192792fcec))
+
 ## [0.0.8](https://github.com/pascaliske/misp-operator/compare/v0.0.7...v0.0.8) (2026-08-01)
 
 
