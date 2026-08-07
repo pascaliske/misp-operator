@@ -262,6 +262,10 @@ endef
 
 ## Helm binary to use for deploying the chart
 HELM ?= helm
+## Helm docs binary to use for generating chart docs
+HELM_DOCS ?= helm-docs
+## Helm schema binary to use for generating chart values schema
+HELM_SCHEMA ?= helm-schema
 ## Namespace to deploy the Helm release
 HELM_NAMESPACE ?= misp-operator-system
 ## Name of the Helm release
@@ -310,3 +314,11 @@ helm-generate-files: kustomize ## Generate files for Helm chart.
 	mkdir -p $(HELM_CHART_FILES)
 	"$(KUSTOMIZE)" build hack/generate-rbac-templates | yq 'select(.kind != "ServiceAccount")' > $(HELM_CHART_FILES)/generated-rbac.yaml
 	"$(KUSTOMIZE)" build config/crd > $(HELM_CHART_FILES)/generated-crds.yaml
+
+.PHONY: helm-docs
+helm-docs:
+	helm-docs
+
+.PHONY: helm-schema
+helm-schema:
+	helm-schema --chart-search-root charts/misp-operator --skip-auto-generation required,additionalProperties --append-newline
