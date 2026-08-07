@@ -106,19 +106,16 @@ func main() {
 	// Rapid Reset CVEs. For more information see:
 	// - https://github.com/advisories/GHSA-qppj-fm5r-hxr3
 	// - https://github.com/advisories/GHSA-4374-p667-p6c8
-	disableHTTP2 := func(c *tls.Config) {
-		setupLog.Info("Disabling HTTP/2")
-		c.NextProtos = []string{"http/1.1"}
-	}
-
 	if !enableHTTP2 {
-		tlsOpts = append(tlsOpts, disableHTTP2)
+		tlsOpts = append(tlsOpts, func(c *tls.Config) {
+			setupLog.Info("Disabling HTTP/2")
+			c.NextProtos = []string{"http/1.1"}
+		})
 	}
 
 	// Initial webhook TLS options
-	webhookTLSOpts := tlsOpts
 	webhookServerOptions := webhook.Options{
-		TLSOpts: webhookTLSOpts,
+		TLSOpts: tlsOpts,
 	}
 
 	if len(webhookCertPath) > 0 {
