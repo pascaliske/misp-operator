@@ -4,8 +4,8 @@
 
 <!-- x-release-please-start-version -->
 [![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)](https://github.com/pascaliske/misp-operator)
-[![Version](https://img.shields.io/static/v1?label=Version&message=0.0.0&color=informational&style=flat-square)](https://github.com/pascaliske/misp-operator)
-[![AppVersion](https://img.shields.io/static/v1?label=AppVersion&message=0.0.0&color=informational&style=flat-square)](https://github.com/pascaliske/misp-operator)
+[![Version](https://img.shields.io/static/v1?label=Version&message=0.0.9&color=informational&style=flat-square)](https://github.com/pascaliske/misp-operator)
+[![AppVersion](https://img.shields.io/static/v1?label=AppVersion&message=0.0.9&color=informational&style=flat-square)](https://github.com/pascaliske/misp-operator)
 <!-- x-release-please-end -->
 
 * <https://github.com/pascaliske/misp-operator>
@@ -36,7 +36,7 @@ The OCI chart of the operator is **keylessly** signed using [`cosign`](https://d
 
 <!-- x-release-please-start-version -->
 ```shell
-cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.0 \
+cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.9 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
