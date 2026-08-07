@@ -49,7 +49,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: spec defines the desired state of MispInstance
+            description: Specification of the desired state of the MispInstance
             properties:
               admin:
                 description: Optional admin account configuration
@@ -772,7 +772,8 @@ spec:
             - database
             type: object
           status:
-            description: status defines the observed state of MispInstance
+            description: Most recently observed status of the MispInstance. This data
+              may not be up to date. Populated by the system. Read-only.
             properties:
               conditions:
                 description: The status of each condition is one of True, False, or
