@@ -30,6 +30,14 @@ To uninstall this chart simply run the following command:
 helm delete {{ template "chart.name" . }}
 ```
 
+<!-- x-release-please-start-version -->
+There's also a [`values.schema.json`](https://raw.githubusercontent.com/pascaliske/misp-operator/refs/tags/v{{ .Version }}/charts/misp-operator/values.schema.json) file available to get intellisense for the available values:
+
+```yaml
+# yaml-language-server: https://raw.githubusercontent.com/pascaliske/misp-operator/refs/tags/v{{ .Version }}/charts/misp-operator/values.schema.json
+```
+<!-- x-release-please-end -->
+
 ## Verification
 
 The OCI chart of the operator is **keylessly** signed using [`cosign`](https://docs.sigstore.dev/cosign/verifying/verify/) and can be can be verified:
