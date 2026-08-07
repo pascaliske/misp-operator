@@ -78,6 +78,10 @@ certManager:
     # kind: Issuer
     # name: ''
 
+networkPolicies:
+  # -- Whether to create network policies for the misp-operator
+  enabled: true
+
 # -- Optional priority class name indicates the importance of a pod relative to other pods.
 priorityClassName: ''
 

@@ -1,0 +1,42 @@
+{{- if .Values.networkPolicies.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "misp-operator.fullname" . }}-allow-metrics-traffic
+  namespace: {{ include "misp-operator.namespace" . }}
+  labels:
+    {{- include "misp-operator.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "misp-operator.selectorLabels" . | nindent 6 }}
+  ingress:
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - port: 9081
+          protocol: TCP
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "misp-operator.fullname" . }}-allow-webhook-traffic
+  namespace: {{ include "misp-operator.namespace" . }}
+  labels:
+    {{- include "misp-operator.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "misp-operator.selectorLabels" . | nindent 6 }}
+  ingress:
+    - from:
+        - namespaceSelector: {}
+      ports:
+        - port: 443
+          protocol: TCP
+  policyTypes:
+    - Ingress
+{{- end }}
