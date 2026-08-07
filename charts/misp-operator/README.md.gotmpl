@@ -1,0 +1,63 @@
+# [`{{ template "chart.name" . }}`]({{ template "chart.homepage" . }})
+
+{{ template "chart.deprecationWarning" . }}
+
+> {{ template "chart.description" . }}
+
+<!-- x-release-please-start-version -->
+[![Type: {{ .Type }}](https://img.shields.io/badge/Type-{{ .Type }}-informational?style=flat-square)]({{ template "chart.homepage" . }})
+[![Version](https://img.shields.io/static/v1?label=Version&message={{ .Version }}&color=informational&style=flat-square)]({{ template "chart.homepage" . }})
+[![AppVersion](https://img.shields.io/static/v1?label=AppVersion&message={{ .AppVersion }}&color=informational&style=flat-square)]({{ template "chart.homepage" . }})
+<!-- x-release-please-end -->
+
+{{ template "chart.sourcesList" . }}
+
+## Requirements
+
+- [`helm`](https://helm.sh) - Refer to their [docs](https://helm.sh/docs) to get started.
+
+## Usage
+
+To install this chart simply run the following command:
+
+```shell
+helm upgrade --install --namespace misp-operator-system --create-namespace {{ template "chart.name" . }} oci://ghcr.io/pascaliske/charts/{{ template "chart.name" . }}
+```
+
+To uninstall this chart simply run the following command:
+
+```sh
+helm delete {{ template "chart.name" . }}
+```
+
+## Verification
+
+The OCI chart of the operator is **keylessly** signed using [`cosign`](https://docs.sigstore.dev/cosign/verifying/verify/) and can be can be verified:
+
+<!-- x-release-please-start-version -->
+```shell
+cosign verify ghcr.io/pascaliske/charts/{{ template "chart.name" . }}:{{ .Version }} \
+  --certificate-identity-regexp "^https://github.com/pascaliske/{{ template "chart.name" . }}.*$" \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com
+```
+<!-- x-release-please-end -->
+
+> [!NOTE]
+> Verification succeeds only if the artifact was signed by the GitHub Actions workflow in this repository.
+> Any modification of the artifact or signing from a different identity will cause verification to fail.
+
+{{ template "chart.valuesHeader" . }}
+
+The following values can be used to adjust the helm chart.
+
+{{ template "chart.valuesTable" . }}
+
+{{ template "chart.maintainersSection" . }}
+
+## Contributing
+
+Contributions of any kind are welcome! Please see the [contribution guide](../../CONTRIBUTING.md) for details.
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 - see the [LICENSE](../../LICENSE.md) file for details.
