@@ -50,10 +50,22 @@ spec:
             - --health-probe-bind-address=:9080
             {{- if .Values.metrics.enabled }}
             - --metrics-bind-address=:9081
+            {{- if not .Values.metrics.secure }}
+            - --metrics-secure=false
+            {{- end }}
+            {{- end }}
+            {{- if and .Values.certManager.enabled .Values.webhook.enabled }}
+            - --webhook-cert-path=/tmp/k8s-webhook-server/serving-certs
+            {{- end }}
+            {{- if and .Values.metrics.enabled .Values.metrics.secure }}
+            - --metrics-cert-path=/tmp/k8s-metrics-server/metrics-certs
             {{- end }}
             {{- range .Values.extraArgs }}
             - {{ . }}
             {{- end }}
+          env:
+            - name: ENABLE_WEBHOOKS
+              value: {{ .Values.webhook.enabled | quote }}
           ports:
             - name: health
               containerPort: 9080
@@ -63,6 +75,24 @@ spec:
               containerPort: 9081
               protocol: TCP
             {{- end }}
+            {{- if .Values.webhook.enabled }}
+            - name: webhook
+              containerPort: 9443
+              protocol: TCP
+            {{- end }}
+          {{- if .Values.certManager.enabled }}
+          volumeMounts:
+            {{- if and .Values.certManager.enabled .Values.webhook.enabled }}
+            - name: webhook-certs
+              mountPath: /tmp/k8s-webhook-server/serving-certs
+              readOnly: true
+            {{- end }}
+            {{- if and .Values.metrics.enabled .Values.metrics.secure }}
+            - name: metrics-certs
+              mountPath: /tmp/k8s-metrics-server/metrics-certs
+              readOnly: true
+            {{- end }}
+          {{- end }}
           livenessProbe:
             httpGet:
               path: /healthz
@@ -83,6 +113,19 @@ spec:
             {{- with .Values.resources }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
+      {{- if .Values.certManager.enabled }}
+      volumes:
+        {{- if and .Values.certManager.enabled .Values.webhook.enabled }}
+        - name: webhook-certs
+          secret:
+            secretName: {{ include "misp-operator.fullname" . }}-webhook-server-cert
+        {{- end }}
+        {{- if and .Values.metrics.enabled .Values.metrics.secure }}
+        - name: metrics-certs
+          secret:
+            secretName: {{ include "misp-operator.fullname" . }}-metrics-server-cert
+        {{- end }}
+      {{- end }}
       {{- with .Values.priorityClassName }}
       priorityClassName: {{ . | quote }}
       {{- end }}

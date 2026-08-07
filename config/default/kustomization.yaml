@@ -1,63 +1,31 @@
-# Adds namespace to all resources.
 namespace: misp-operator-system
-
-# Value of this field is prepended to the
-# names of all resources, e.g. a deployment named
-# "wordpress" becomes "alices-wordpress".
-# Note that it should also match with the prefix (text before '-') of the namespace
-# field above.
 namePrefix: misp-operator-
-
-# Labels to add to all resources and selectors.
-#labels:
-#- includeSelectors: true
-#  pairs:
-#    someName: someValue
 
 resources:
 - ../crd
 - ../rbac
 - ../manager
-# [WEBHOOK] To enable webhook, uncomment all the sections with [WEBHOOK] prefix including the one in
-# crd/kustomization.yaml
 - ../webhook
-# [CERTMANAGER] To enable cert-manager, uncomment all sections with 'CERTMANAGER'. 'WEBHOOK' components are required.
 - ../certmanager
-# [PROMETHEUS] To enable prometheus monitor, uncomment all sections with 'PROMETHEUS'.
 - ../prometheus
-# [METRICS] Expose the controller manager metrics service.
 - metrics_service.yaml
-# [NETWORK POLICY] Protect the /metrics endpoint and Webhook Server with NetworkPolicy.
-# Only Pod(s) running a namespace labeled with 'metrics: enabled' will be able to gather the metrics.
-# Only CR(s) which requires webhooks and are applied on namespaces labeled with 'webhooks: enabled' will
-# be able to communicate with the Webhook Server.
 - ../network-policy
 
-# Uncomment the patches line if you enable Metrics
 patches:
-# [METRICS] The following patch will enable the metrics endpoint using HTTPS and the port :8443.
-# More info: https://book.kubebuilder.io/reference/metrics
 - path: manager_metrics_patch.yaml
   target:
     kind: Deployment
 
-# Uncomment the patches line if you enable Metrics and CertManager
-# [METRICS-WITH-CERTS] To enable metrics protected with certManager, uncomment the following line.
-# This patch will protect the metrics with certManager self-signed certs.
 - path: cert_metrics_manager_patch.yaml
   target:
    kind: Deployment
 
-# [WEBHOOK] To enable webhook, uncomment all the sections with [WEBHOOK] prefix including the one in
-# crd/kustomization.yaml
 - path: manager_webhook_patch.yaml
   target:
     kind: Deployment
 
-# [CERTMANAGER] To enable cert-manager, uncomment all sections with 'CERTMANAGER' prefix.
-# Uncomment the following replacements to add the cert-manager CA injection annotations
 replacements:
-- source: # Uncomment the following block to enable certificates for metrics
+- source:
     kind: Service
     version: v1
     name: controller-manager-metrics-service
@@ -75,7 +43,7 @@ replacements:
         delimiter: '.'
         index: 0
         create: true
-    - select: # Uncomment the following to set the Service name for TLS config in Prometheus ServiceMonitor
+    - select:
         kind: ServiceMonitor
         group: monitoring.coreos.com
         version: v1
@@ -105,7 +73,7 @@ replacements:
         delimiter: '.'
         index: 1
         create: true
-    - select: # Uncomment the following to set the Service namespace for TLS in Prometheus ServiceMonitor
+    - select:
         kind: ServiceMonitor
         group: monitoring.coreos.com
         version: v1
@@ -117,11 +85,11 @@ replacements:
         index: 1
         create: true
 
-- source: # Uncomment the following block if you have any webhook
+- source:
     kind: Service
     version: v1
     name: webhook-service
-    fieldPath: .metadata.name # Name of the service
+    fieldPath: .metadata.name
   targets:
     - select:
         kind: Certificate
@@ -139,7 +107,7 @@ replacements:
     kind: Service
     version: v1
     name: webhook-service
-    fieldPath: .metadata.namespace # Namespace of the service
+    fieldPath: .metadata.namespace
   targets:
     - select:
         kind: Certificate
@@ -154,12 +122,12 @@ replacements:
         index: 1
         create: true
 
-- source: # Uncomment the following block if you have a ValidatingWebhook (--programmatic-validation)
+- source:
     kind: Certificate
     group: cert-manager.io
     version: v1
-    name: serving-cert # This name should match the one in certificate.yaml
-    fieldPath: .metadata.namespace # Namespace of the certificate CR
+    name: serving-cert
+    fieldPath: .metadata.namespace
   targets:
     - select:
         kind: ValidatingWebhookConfiguration
@@ -185,12 +153,12 @@ replacements:
         index: 1
         create: true
 
-- source: # Uncomment the following block if you have a DefaultingWebhook (--defaulting )
+- source:
     kind: Certificate
     group: cert-manager.io
     version: v1
     name: serving-cert
-    fieldPath: .metadata.namespace # Namespace of the certificate CR
+    fieldPath: .metadata.namespace
   targets:
     - select:
         kind: MutatingWebhookConfiguration

@@ -1,0 +1,21 @@
+{{- if and .Values.certManager.enabled .Values.webhook.enabled }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ include "misp-operator.fullname" . }}-serving-cert
+  namespace: {{ include "misp-operator.namespace" . }}
+  labels:
+    {{- include "misp-operator.labels" . | nindent 4 }}
+spec:
+  dnsNames:
+    - {{ include "misp-operator.fullname" . }}-webhook-service.{{ include "misp-operator.namespace" . }}.svc
+    - {{ include "misp-operator.fullname" . }}-webhook-service.{{ include "misp-operator.namespace" . }}.svc.cluster.local
+  issuerRef:
+  {{- if .Values.certManager.issuerRef}}
+    {{ .Values.certManager.issuerRef | toYaml | nindent 4 }}
+  {{- else }}
+    kind: Issuer
+    name: {{ include "misp-operator.fullname" . }}-selfsigned-issuer
+  {{- end }}
+  secretName: {{ include "misp-operator.fullname" . }}-webhook-server-cert
+{{- end }}

@@ -1,0 +1,11 @@
+{{- if and .Values.certManager.enabled (not .Values.certManager.issuerRef) }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ include "misp-operator.fullname" . }}-selfsigned-issuer
+  namespace: {{ include "misp-operator.namespace" . }}
+  labels:
+    {{- include "misp-operator.labels" . | nindent 4 }}
+spec:
+  selfSigned: {}
+{{- end }}

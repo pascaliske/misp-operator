@@ -52,6 +52,8 @@ rbac:
 metrics:
   # -- Enable operator internal metrics. Prometheus must be installed in the cluster
   enabled: true
+  # -- Enable secure metrics endpoint. This requires cert-manager to be installed.
+  secure: true
   serviceMonitor:
     # -- Create a service monitor for Prometheus operator.
     enabled: true
@@ -63,6 +65,18 @@ metrics:
     annotations: {}
     # -- Additional labels for the service monitor object.
     labels: {}
+
+webhook:
+  # -- Enable the webhooks endpoint.
+  enabled: true
+
+certManager:
+  # -- Enable the cert-manager integration for providing certs for metrics and webhooks.
+  enabled: true
+  # -- Provide custom issuer for certs.
+  issuerRef: {}
+    # kind: Issuer
+    # name: ''
 
 # -- Optional priority class name indicates the importance of a pod relative to other pods.
 priorityClassName: ''

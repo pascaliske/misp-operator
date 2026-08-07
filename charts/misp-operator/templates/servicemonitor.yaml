@@ -17,11 +17,32 @@ spec:
   endpoints:
     - port: metrics
       path: /metrics
+      scheme: {{ if .Values.metrics.secure }}https{{ else }}http{{ end }}
       {{- if $.Values.metrics.serviceMonitor.interval }}
       interval: {{ $.Values.metrics.serviceMonitor.interval }}
       {{- end }}
       {{- if $.Values.metrics.serviceMonitor.timeout }}
       scrapeTimeout: {{ $.Values.metrics.serviceMonitor.timeout }}
+      {{- end }}
+      {{- if .Values.metrics.secure }}
+      tlsConfig:
+        serverName: {{ include "misp-operator.fullname" . }}-metrics-service.{{ include "misp-operator.namespace" . }}.svc
+        {{- if .Values.certManager.enabled }}
+        ca:
+          secret:
+            key: ca.crt
+            name: {{ include "misp-operator.fullname" . }}-metrics-cert
+        cert:
+          secret:
+            key: tls.crt
+            name: {{ include "misp-operator.fullname" . }}-metrics-cert
+        keySecret:
+          key: tls.key
+          name: {{ include "misp-operator.fullname" . }}-metrics-cert
+        insecureSkipVerify: false
+        {{- else }}
+        insecureSkipVerify: true
+        {{- end }}
       {{- end }}
   jobLabel: {{ include "misp-operator.fullname" . }}
   namespaceSelector:
