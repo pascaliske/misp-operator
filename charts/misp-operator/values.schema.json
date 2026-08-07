@@ -1,0 +1,430 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "properties": {
+    "affinity": {
+      "description": "Pod-level affinity. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).",
+      "required": [],
+      "title": "affinity",
+      "type": "object"
+    },
+    "certManager": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "description": "Enable the cert-manager integration for providing certs for metrics and webhooks.",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "issuerRef": {
+          "description": "Provide custom issuer for certs.",
+          "required": [],
+          "title": "issuerRef",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "certManager",
+      "type": "object"
+    },
+    "controller": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the controller object.",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "labels": {
+          "description": "Additional labels for the controller object.",
+          "required": [],
+          "title": "labels",
+          "type": "object"
+        },
+        "replicas": {
+          "default": 1,
+          "description": "The number of replicas.",
+          "title": "replicas",
+          "type": "integer"
+        },
+        "updateStrategy": {
+          "description": "The controller update strategy. Currently only applies to controllers of kind `Deployment`.",
+          "required": [],
+          "title": "updateStrategy",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "controller",
+      "type": "object"
+    },
+    "crds": {
+      "properties": {
+        "create": {
+          "default": true,
+          "description": "Specifies whether the CRDs should be created when installing the chart.",
+          "title": "create",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "crds",
+      "type": "object"
+    },
+    "extraArgs": {
+      "description": "Additional arguments to be added to the operator's args list.",
+      "items": {
+        "required": []
+      },
+      "title": "extraArgs",
+      "type": "array"
+    },
+    "extraVolumeMounts": {
+      "description": "Specify extra volume mounts for the default containers.",
+      "items": {
+        "required": []
+      },
+      "title": "extraVolumeMounts",
+      "type": "array"
+    },
+    "extraVolumes": {
+      "description": "Specify extra volumes for the workload.",
+      "items": {
+        "required": []
+      },
+      "title": "extraVolumes",
+      "type": "array"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "properties": {
+        "pullPolicy": {
+          "default": "IfNotPresent",
+          "description": "The pull policy for the controller.",
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "registry": {
+          "default": "ghcr.io",
+          "description": "The registry to pull the image from.",
+          "title": "registry",
+          "type": "string"
+        },
+        "repository": {
+          "default": "pascaliske/misp-operator",
+          "description": "The repository to pull the image from.",
+          "title": "repository",
+          "type": "string"
+        },
+        "tag": {
+          "default": "",
+          "description": "The image tag, if left empty chart's appVersion will be used.",
+          "title": "tag",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "metrics": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "description": "Enable operator internal metrics. Prometheus must be installed in the cluster",
+          "title": "enabled",
+          "type": "boolean"
+        },
+        "secure": {
+          "default": true,
+          "description": "Enable secure metrics endpoint. This requires cert-manager to be installed.",
+          "title": "secure",
+          "type": "boolean"
+        },
+        "serviceMonitor": {
+          "properties": {
+            "annotations": {
+              "description": "Additional annotations for the service monitor object.",
+              "required": [],
+              "title": "annotations",
+              "type": "object"
+            },
+            "enabled": {
+              "default": true,
+              "description": "Create a service monitor for Prometheus operator.",
+              "title": "enabled",
+              "type": "boolean"
+            },
+            "interval": {
+              "default": "30s",
+              "description": "How frequently the exporter should be scraped.",
+              "title": "interval",
+              "type": "string"
+            },
+            "labels": {
+              "description": "Additional labels for the service monitor object.",
+              "required": [],
+              "title": "labels",
+              "type": "object"
+            },
+            "timeout": {
+              "default": "10s",
+              "description": "Timeout value for individual scrapes.",
+              "title": "timeout",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "serviceMonitor",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "metrics",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "description": "Overriding the chart name and namespace",
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "namespaceOverride": {
+      "default": "",
+      "title": "namespaceOverride",
+      "type": "string"
+    },
+    "nodeSelector": {
+      "description": "Pod-level node selector. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).",
+      "required": [],
+      "title": "nodeSelector",
+      "type": "object"
+    },
+    "podAnnotations": {
+      "description": "Annotations to be added to the pod.",
+      "required": [],
+      "title": "podAnnotations",
+      "type": "object"
+    },
+    "podLabels": {
+      "description": "Labels to be added to the pod.",
+      "required": [],
+      "title": "podLabels",
+      "type": "object"
+    },
+    "podSecurityContext": {
+      "description": "Pod-level security attributes. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context).",
+      "properties": {
+        "runAsGroup": {
+          "default": 65532,
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 65532,
+          "title": "runAsUser",
+          "type": "integer"
+        },
+        "seccompProfile": {
+          "properties": {
+            "type": {
+              "default": "RuntimeDefault",
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "seccompProfile",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "podSecurityContext",
+      "type": "object"
+    },
+    "priorityClassName": {
+      "default": "",
+      "description": "Optional priority class name indicates the importance of a pod relative to other pods.",
+      "title": "priorityClassName",
+      "type": "string"
+    },
+    "rbac": {
+      "properties": {
+        "create": {
+          "default": true,
+          "description": "Specifies whether ClusterRole and ClusterRoleBinding should be created.",
+          "title": "create",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "rbac",
+      "type": "object"
+    },
+    "resources": {
+      "description": "Compute resources used by the container. More info [here](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).",
+      "properties": {
+        "limits": {
+          "properties": {
+            "cpu": {
+              "default": "250m",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "256Mi",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "limits",
+          "type": "object"
+        },
+        "requests": {
+          "properties": {
+            "cpu": {
+              "default": "100m",
+              "title": "cpu",
+              "type": "string"
+            },
+            "memory": {
+              "default": "128Mi",
+              "title": "memory",
+              "type": "string"
+            }
+          },
+          "required": [],
+          "title": "requests",
+          "type": "object"
+        }
+      },
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "securityContext": {
+      "description": "Container-level security attributes. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context).",
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "title": "allowPrivilegeEscalation",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "privileged": {
+          "default": false,
+          "title": "privileged",
+          "type": "boolean"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "properties": {
+        "annotations": {
+          "description": "Additional annotations for the role and role binding objects.",
+          "required": [],
+          "title": "annotations",
+          "type": "object"
+        },
+        "automount": {
+          "default": true,
+          "description": "Automatically mount the ServiceAccount API credentials",
+          "title": "automount",
+          "type": "boolean"
+        },
+        "create": {
+          "default": true,
+          "description": "Create a `ServiceAccount` object.",
+          "title": "create",
+          "type": "boolean"
+        },
+        "labels": {
+          "description": "Additional labels for the role and role binding objects.",
+          "required": [],
+          "title": "labels",
+          "type": "object"
+        },
+        "name": {
+          "default": "",
+          "description": "Specify the service account used for the controller.",
+          "title": "name",
+          "type": "string"
+        }
+      },
+      "required": [],
+      "title": "serviceAccount",
+      "type": "object"
+    },
+    "tolerations": {
+      "description": "Pod-level tolerations. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).",
+      "items": {
+        "required": []
+      },
+      "title": "tolerations",
+      "type": "array"
+    },
+    "webhook": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "description": "Enable the webhooks endpoint.",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "webhook",
+      "type": "object"
+    }
+  },
+  "required": [],
+  "type": "object"
+}
