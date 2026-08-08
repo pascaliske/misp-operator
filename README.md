@@ -85,13 +85,13 @@ The OCI images of the operator and it's Helm chart are **keylessly** signed usin
 
 <!-- x-release-please-start-version -->
 ```shell
-cosign verify ghcr.io/pascaliske/misp-operator:0.0.9 \
+cosign verify ghcr.io/pascaliske/misp-operator:0.0.10 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
 ```shell
-cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.9 \
+cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.10 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```

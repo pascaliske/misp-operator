@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.10](https://github.com/pascaliske/misp-operator/compare/v0.0.9...v0.0.10) (2026-08-07)
+
+
+### Features
+
+* **chart:** add note about values schema reference ([21436e6](https://github.com/pascaliske/misp-operator/commit/21436e60823b3a616a46fc81419083c9aeea0766))
+* **chart:** provide values schema for intellisense ([8347b03](https://github.com/pascaliske/misp-operator/commit/8347b03c3b1c429e175a450454c0e15887c0dd27))
+* **chart:** support network policies for metrics and webhooks ([1b79467](https://github.com/pascaliske/misp-operator/commit/1b79467d16d7712b94a77e5955d13301e2ad14f7))
+
+
+### Bug Fixes
+
+* **chart:** prefix webhook configurations to prevent collisions ([cf2f4b0](https://github.com/pascaliske/misp-operator/commit/cf2f4b044a9f76a95eef76d7656f5a9fbd3c05f7))
+
 ## [0.0.9](https://github.com/pascaliske/misp-operator/compare/v0.0.8...v0.0.9) (2026-08-07)
 
 
