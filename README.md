@@ -2,11 +2,11 @@
 
 > A Kubernetes operator for simplified deployments of MISP at scale.
 
-This project aims to simplify the deployment, configuration and management of any number of MISP instances inside a Kubernetes cluster through a set of CRDs.
+This project aims to simplify the deployment, configuration and management of any number of [MISP](https://github.com/misp/misp) instances inside a Kubernetes cluster through a set of CRDs.
 It builds upon the images from the [misp/misp-docker](https://github.com/misp/misp-docker) project and integrates them with native Kubernetes tooling.
 
 > [!NOTE]
-> This project is still in the early stages of development. Feedback is highly appreciated!
+> This project is still in the early stages of development. [Feedback](https://github.com/pascaliske/misp-operator/issues/new/choose) is highly appreciated!
 
 > [!NOTE]
 > The operator code is based on the updated images of [this PR](https://github.com/MISP/misp-docker/pull/430). Until the PR is merged you need to clone the fork und build the images yourself to give it a try:
@@ -17,11 +17,14 @@ It builds upon the images from the [misp/misp-docker](https://github.com/misp/mi
 > docker compose build misp-core misp-nginx
 > ```
 >
-> Don't forget to load the images into your environment (`ctr -n k8s.io images import` / `kind load docker-image`).
+> Don't forget to load the images into your environment:
+>
+> - containerd: `ctr -n k8s.io images import`
+> - kind: `kind load docker-image`
 
 ## Features
 
-- Deploying MISP instances easily via [`MispInstance`](config/samples/mispinstance-minimal.yaml)
+- Deploying MISP instances declaratively via [`MispInstance`](config/samples/mispinstance-minimal.yaml)
 - Built-in deployment of [MISP modules](https://github.com/misp/misp-modules) container
 - Seamless integration with native K8s tooling, e.g. [External Secrets Operator](https://github.com/external-secrets/external-secrets) or [cert-manager](https://github.com/cert-manager/cert-manager)
 - GitOps friendly by design
@@ -44,9 +47,11 @@ helm upgrade --install --namespace misp-operator-system --create-namespace misp-
 
 There is also an install manifest attached to all releases which can be used to install the operator via `kubectl`:
 
+<!-- x-release-please-start-version -->
 ```shell
-kubectl apply -n misp-operator-system -f https://github.com/pascaliske/misp-operator/releases/latest/download/install.yaml
+kubectl apply -n misp-operator-system -f https://github.com/pascaliske/misp-operator/releases/download/v0.0.10/install.yaml
 ```
+<!-- x-release-please-end -->
 
 ### Usage
 
@@ -77,7 +82,9 @@ spec:
       name: redis-user
 ```
 
-You can find more examples in the [config/samples](config/samples/) directory. Basic documentation of the CRDs can also be viewed via [https://doc.crds.dev](https://doc.crds.dev/github.com/pascaliske/misp-operator).
+You can find more examples in the [config/samples](config/samples/) directory.
+
+Basic documentation of the CRDs can also be viewed via [https://doc.crds.dev](https://doc.crds.dev/github.com/pascaliske/misp-operator).
 
 ## Verification
 
