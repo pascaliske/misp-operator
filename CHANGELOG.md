@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.11](https://github.com/pascaliske/misp-operator/compare/v0.0.10...v0.0.11) (2026-08-28)
+
+
+### Bug Fixes
+
+* **deps:** update kubernetes monorepo to v0.36.4 ([73de768](https://github.com/pascaliske/misp-operator/commit/73de768521949805f0a8cfd064701c151140affe))
+* **deps:** update kubernetes monorepo to v0.37.0 ([6c68010](https://github.com/pascaliske/misp-operator/commit/6c68010cbffba160613aa39ed81897e6241227a3))
+* **deps:** update kubernetes monorepo to v0.37.0 ([a0d100f](https://github.com/pascaliske/misp-operator/commit/a0d100f76d2a28f9ff662aeca5a85d602a3b4050))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.32.1 ([448bb4c](https://github.com/pascaliske/misp-operator/commit/448bb4c3371c717d142e92b550d702c3ea3d2c3d))
+* **deps:** update module github.com/onsi/gomega to v1.43.0 ([5d916e9](https://github.com/pascaliske/misp-operator/commit/5d916e957210d33cc5631d53f2cf3a7e9845a1f9))
+* **deps:** update module github.com/onsi/gomega to v1.43.0 ([510b3f6](https://github.com/pascaliske/misp-operator/commit/510b3f6a4edd5f0eb0fa16d50c323b90707688d8))
+
 ## [0.0.10](https://github.com/pascaliske/misp-operator/compare/v0.0.9...v0.0.10) (2026-08-07)
 
 
