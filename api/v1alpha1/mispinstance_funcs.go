@@ -23,13 +23,13 @@ import (
 	"strings"
 )
 
-// renovate: image=ghcr.io/misp/misp-docker/misp-core
+// renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-core
 const mispInstanceCoreImageDefault = "ghcr.io/misp/misp-docker/misp-core:v2.5.44"
 
-// renovate: image=ghcr.io/misp/misp-docker/misp-nginx
+// renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-nginx
 const mispInstanceNginxImageDefault = "ghcr.io/misp/misp-docker/misp-nginx:v2.5.44"
 
-// renovate: image=ghcr.io/misp/misp-docker/misp-modules
+// renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-modules
 const mispInstanceModulesImageDefault = "ghcr.io/misp/misp-docker/misp-modules:v3.0.9"
 
 // Returns the custom misp-core image if set or the default misp-core image as fallback
