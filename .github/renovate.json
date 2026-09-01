@@ -5,7 +5,7 @@
     {
       "customType": "regex",
       "description": "Process various dependencies via comment lines",
-      "fileMatch": [".+\\.ya?ml$", ".+\\.go$"],
+      "managerFilePatterns": ["/.+\\.ya?ml$/", "/.+\\.go$/"],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}docker{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
       "matchStrings": [
