@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.12](https://github.com/pascaliske/misp-operator/compare/v0.0.11...v0.0.12) (2026-09-04)
+
+
+### Bug Fixes
+
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.0 ([a27dde1](https://github.com/pascaliske/misp-operator/commit/a27dde1aa63860d8e4c0dc8077328d068245b39b))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.0 ([9542808](https://github.com/pascaliske/misp-operator/commit/9542808cf7d6250241a71b37e831b42ba75af214))
+
 ## [0.0.11](https://github.com/pascaliske/misp-operator/compare/v0.0.10...v0.0.11) (2026-08-28)
 
 
