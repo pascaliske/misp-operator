@@ -17,6 +17,10 @@
     {
       "matchManagers": ["gomod"],
       "postUpdateOptions": ["gomodTidy"]
+    },
+    {
+      "matchPackageNames": ["/misp\/misp-docker/"],
+      "sourceUrl": "https://github.com/misp/misp-docker"
     }
   ]
 }
