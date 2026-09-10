@@ -49,7 +49,7 @@ There is also an install manifest attached to all releases which can be used to 
 
 <!-- x-release-please-start-version -->
 ```shell
-kubectl apply -n misp-operator-system -f https://github.com/pascaliske/misp-operator/releases/download/v0.0.11/install.yaml
+kubectl apply -n misp-operator-system -f https://github.com/pascaliske/misp-operator/releases/download/v0.0.12/install.yaml
 ```
 <!-- x-release-please-end -->
 
@@ -92,13 +92,13 @@ The OCI images of the operator and it's Helm chart are **keylessly** signed usin
 
 <!-- x-release-please-start-version -->
 ```shell
-cosign verify ghcr.io/pascaliske/misp-operator:0.0.11 \
+cosign verify ghcr.io/pascaliske/misp-operator:0.0.12 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
 ```shell
-cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.11 \
+cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.12 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
