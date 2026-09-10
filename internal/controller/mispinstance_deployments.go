@@ -560,10 +560,6 @@ func (r *MispInstanceReconciler) createNginxContainer(mispInstance *mispv1alpha1
 		WithVolumeMounts(
 			corev1apply.
 				VolumeMount().
-				WithName("misp-cache").
-				WithMountPath("/var/www/MISP/cache"),
-			corev1apply.
-				VolumeMount().
 				WithName("nginx-config").
 				WithMountPath("/etc/nginx/conf.d"),
 			corev1apply.
@@ -698,12 +694,6 @@ func (r *MispInstanceReconciler) createInstanceDeployment(mispInstance *mispv1al
 			corev1apply.
 				Volume().
 				WithName("misp-logs").
-				WithEmptyDir(
-					corev1apply.EmptyDirVolumeSource(),
-				),
-			corev1apply.
-				Volume().
-				WithName("misp-cache").
 				WithEmptyDir(
 					corev1apply.EmptyDirVolumeSource(),
 				),
