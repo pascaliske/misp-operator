@@ -27,7 +27,7 @@ import (
 const mispInstanceCoreImageDefault = "ghcr.io/misp/misp-docker/misp-core:v2.5.45"
 
 // renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-nginx
-const mispInstanceNginxImageDefault = "ghcr.io/misp/misp-docker/misp-nginx:v2.5.44"
+const mispInstanceNginxImageDefault = "ghcr.io/misp/misp-docker/misp-nginx:v2.5.46"
 
 // renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-modules
 const mispInstanceModulesImageDefault = "ghcr.io/misp/misp-docker/misp-modules:v3.0.9"
