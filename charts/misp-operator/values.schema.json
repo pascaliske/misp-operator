@@ -210,6 +210,19 @@
       "title": "namespaceOverride",
       "type": "string"
     },
+    "networkPolicies": {
+      "properties": {
+        "enabled": {
+          "default": true,
+          "description": "Whether to create network policies for the misp-operator",
+          "title": "enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [],
+      "title": "networkPolicies",
+      "type": "object"
+    },
     "nodeSelector": {
       "description": "Pod-level node selector. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling).",
       "required": [],

@@ -86,6 +86,7 @@ The following values can be used to adjust the helm chart.
 | metrics.serviceMonitor.timeout | string | `"10s"` | Timeout value for individual scrapes. |
 | nameOverride | string | `""` |  |
 | namespaceOverride | string | `""` |  |
+| networkPolicies.enabled | bool | `true` | Whether to create network policies for the misp-operator |
 | nodeSelector | object | `{}` | Pod-level node selector. More info [here](https://kubernetes.io/docs/reference/kubernetes-api/workload-resources/pod-v1/#scheduling). |
 | podAnnotations | object | `{}` | Annotations to be added to the pod. |
 | podLabels | object | `{}` | Labels to be added to the pod. |
