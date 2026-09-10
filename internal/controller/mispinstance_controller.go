@@ -32,6 +32,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
+	"sigs.k8s.io/controller-runtime/pkg/event"
 	"sigs.k8s.io/controller-runtime/pkg/log"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/predicate"
@@ -204,10 +205,31 @@ func (r *MispInstanceReconciler) reconcileRestart(ctx context.Context, mispInsta
 	return r.Update(ctx, &deployment)
 }
 
+func SpecificAnnotationChangedPredicate(key string) predicate.Predicate {
+	return predicate.Funcs{
+		CreateFunc:  func(e event.CreateEvent) bool { return true },
+		DeleteFunc:  func(e event.DeleteEvent) bool { return true },
+		GenericFunc: func(e event.GenericEvent) bool { return true },
+		UpdateFunc: func(e event.UpdateEvent) bool {
+			// skip if any object is empty
+			if e.ObjectOld == nil || e.ObjectNew == nil {
+				return false
+			}
+
+			// fetch given annotation
+			oldVal, oldOk := e.ObjectOld.GetAnnotations()[key]
+			newVal, newOk := e.ObjectNew.GetAnnotations()[key]
+
+			// compare old and new annotation values
+			return oldOk != newOk || oldVal != newVal
+		},
+	}
+}
+
 // SetupWithManager sets up the controller with the Manager.
 func (r *MispInstanceReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&mispv1alpha1.MispInstance{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
+		For(&mispv1alpha1.MispInstance{}, builder.WithPredicates(predicate.Or(predicate.GenerationChangedPredicate{}, SpecificAnnotationChangedPredicate(RestartAnnotation)))).
 		Owns(&appsv1.Deployment{}).
 		Owns(&corev1.PersistentVolumeClaim{}).
 		Owns(&corev1.Service{}).
