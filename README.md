@@ -18,6 +18,7 @@ It builds upon the images from the [misp/misp-docker](https://github.com/misp/mi
 - Built-in deployment of [MISP modules](https://github.com/misp/misp-modules) container
 - Seamless integration with native K8s tooling, e.g. [External Secrets Operator](https://github.com/external-secrets/external-secrets) or [cert-manager](https://github.com/cert-manager/cert-manager)
 - GitOps friendly by design
+- *More features coming soon...*
 
 ## Getting Started
 
@@ -48,6 +49,7 @@ kubectl apply -n misp-operator-system -f https://github.com/pascaliske/misp-oper
 As minimal example the following `MispInstance` can be used:
 
 ```yaml
+---
 apiVersion: misp.k8s.pascaliske.dev/v1alpha1
 kind: MispInstance
 metadata:
@@ -82,12 +84,14 @@ The OCI images of the operator and it's Helm chart are **keylessly** signed usin
 
 <!-- x-release-please-start-version -->
 ```shell
+# verify operator image
 cosign verify ghcr.io/pascaliske/misp-operator:0.0.11 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
 ```
 
 ```shell
+# verify helm chart image
 cosign verify ghcr.io/pascaliske/charts/misp-operator:0.0.11 \
   --certificate-identity-regexp "^https://github.com/pascaliske/misp-operator.*$" \
   --certificate-oidc-issuer https://token.actions.githubusercontent.com
