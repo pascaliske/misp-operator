@@ -9,18 +9,8 @@ It builds upon the images from the [misp/misp-docker](https://github.com/misp/mi
 > This project is still in the early stages of development. [Feedback](https://github.com/pascaliske/misp-operator/issues/new/choose) is highly appreciated!
 
 > [!NOTE]
-> The operator code is based on the updated images of [this PR](https://github.com/MISP/misp-docker/pull/430). Until the PR is merged you need to clone the fork und build the images yourself to give it a try:
->
-> ```shell
-> git clone -b feature/extract-nginx-from-core-image https://github.com/pascaliske/misp-docker
-> cp template.env .env
-> docker compose build misp-core misp-nginx
-> ```
->
-> Don't forget to load the images into your environment:
->
-> - containerd: `ctr -n k8s.io images import`
-> - kind: `kind load docker-image`
+> The operator code is based on the updated images of [this PR](https://github.com/MISP/misp-docker/pull/430).
+> Please make sure to use a version of `misp-core` `>= v2.5.46` for compatibility with the new `misp-nginx` image!
 
 ## Features
 
