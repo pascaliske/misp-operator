@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=values.schema.json
 image:
   # -- The registry to pull the image from.
   registry: ghcr.io

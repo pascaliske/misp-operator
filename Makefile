@@ -321,4 +321,4 @@ helm-docs:
 
 .PHONY: helm-schema
 helm-schema:
-	helm-schema --chart-search-root charts/misp-operator --skip-auto-generation required,additionalProperties --append-newline
+	helm-schema --chart-search-root charts/misp-operator --skip-auto-generation required,additionalProperties --append-newline --add-schema-reference

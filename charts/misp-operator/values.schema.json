@@ -106,6 +106,7 @@
       "type": "object"
     },
     "image": {
+      "description": "yaml-language-server: $schema=values.schema.json",
       "properties": {
         "pullPolicy": {
           "default": "IfNotPresent",
