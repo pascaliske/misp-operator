@@ -3,4 +3,5 @@
 # It should be run by config/default
 resources:
 - bases/misp.k8s.pascaliske.dev_mispinstances.yaml
+- bases/misp.k8s.pascaliske.dev_mispsyncconfigs.yaml
 # +kubebuilder:scaffold:crdkustomizeresource
