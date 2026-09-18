@@ -21,7 +21,8 @@
     {
       "matchPackageNames": ["/misp\/misp-docker/"],
       "groupName": "misp-docker",
-      "sourceUrl": "https://github.com/misp/misp-docker"
+      "sourceUrl": "https://github.com/misp/misp-docker",
+      "semanticCommitType": "feat"
     }
   ]
 }
