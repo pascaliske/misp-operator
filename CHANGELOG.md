@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.0.13](https://github.com/pascaliske/misp-operator/compare/v0.0.12...v0.0.13) (2026-09-18)
+
+
+### Features
+
+* **deps:** update misp-docker to v2.5.47 ([937f3b5](https://github.com/pascaliske/misp-operator/commit/937f3b5a57c5b91cca7a4cfed4bd91d7286a517d))
+* **deps:** update misp-docker to v2.5.47 ([1e6e262](https://github.com/pascaliske/misp-operator/commit/1e6e262f4d8f79e5d34fbf50fb6a7f20a9649c17))
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.33.0 ([bda8fb6](https://github.com/pascaliske/misp-operator/commit/bda8fb6049639b5221cc877cb6ef4d7ce2279e36))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.33.0 ([516a1b8](https://github.com/pascaliske/misp-operator/commit/516a1b87b3c3a8c898a06f9267b30ed206384d97))
+* **deps:** update module github.com/onsi/gomega to v1.43.1 ([74cec38](https://github.com/pascaliske/misp-operator/commit/74cec38c4641fcc1fbebf38cd73d06dea56292c3))
+* **deps:** update module github.com/onsi/gomega to v1.43.1 ([e500e3b](https://github.com/pascaliske/misp-operator/commit/e500e3b18598c8f32f2bb71ea49f67d8cb1c2bed))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.1 ([e2fbe7c](https://github.com/pascaliske/misp-operator/commit/e2fbe7c0e3c0fb9bad10786aba074f198ab8fc83))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.1 ([5065f4f](https://github.com/pascaliske/misp-operator/commit/5065f4fcd0e40fb3bbecedd6f50e514e93a2ac25))
+
 ## [0.0.12](https://github.com/pascaliske/misp-operator/compare/v0.0.11...v0.0.12) (2026-09-13)
 
 
