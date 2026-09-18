@@ -172,6 +172,13 @@ func main() {
 		os.Exit(1)
 	}
 
+	if err := controller.NewMispSyncConfigReconciler(mgr).SetupWithManager(mgr); err != nil {
+		setupLog.Error(err, "Failed to create controller", "controller", "MispSyncConfig")
+		os.Exit(1)
+	}
+
+	// +kubebuilder:scaffold:builder
+
 	// nolint:goconst
 	if os.Getenv("ENABLE_WEBHOOKS") != "false" {
 		if err := webhookv1alpha1.SetupMispInstanceWebhookWithManager(mgr); err != nil {
@@ -179,8 +186,6 @@ func main() {
 			os.Exit(1)
 		}
 	}
-
-	// +kubebuilder:scaffold:builder
 
 	// setup probe endpoints
 	if err := mgr.AddHealthzCheck("healthz", healthz.Ping); err != nil {

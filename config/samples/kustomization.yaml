@@ -1,4 +1,5 @@
 resources:
 - mispinstance-full.yaml
 - mispinstance-minimal.yaml
+- misp_v1alpha1_mispsyncconfig.yaml
 # +kubebuilder:scaffold:manifestskustomizesamples
