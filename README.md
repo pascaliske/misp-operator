@@ -16,6 +16,7 @@ It builds upon the images from the [misp/misp-docker](https://github.com/misp/mi
 
 - Deploying MISP instances declaratively via [`MispInstance`](config/samples/mispinstance-minimal.yaml)
 - Built-in deployment of [MISP modules](https://github.com/misp/misp-modules) container
+- Automatic configuration of instance synchronization via [`MispSyncConfig`](config/samples/mispsyncconfig-minimal.yaml)
 - Seamless integration with native K8s tooling, e.g. [External Secrets Operator](https://github.com/external-secrets/external-secrets) or [cert-manager](https://github.com/cert-manager/cert-manager)
 - GitOps friendly by design
 - *More features coming soon...*
