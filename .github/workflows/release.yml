@@ -87,6 +87,7 @@ jobs:
 
   chart:
     name: Helm Chart
+    needs: image
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     permissions:
