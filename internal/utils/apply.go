@@ -80,3 +80,20 @@ func EnvVarToApplyConfiguration(env corev1.EnvVar) *corev1apply.EnvVarApplyConfi
 
 	return ac
 }
+
+func TolerationToApplyConfiguration(toleration corev1.Toleration) *corev1apply.TolerationApplyConfiguration {
+	ac := corev1apply.
+		Toleration().
+		WithOperator(toleration.Operator).
+		WithEffect(toleration.Effect)
+
+	if len(toleration.Key) > 0 {
+		ac = ac.WithKey(toleration.Key)
+	}
+
+	if len(toleration.Value) > 0 {
+		ac = ac.WithValue(toleration.Value)
+	}
+
+	return ac
+}

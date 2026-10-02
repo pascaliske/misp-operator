@@ -728,6 +728,17 @@ func (r *MispInstanceReconciler) createInstanceDeployment(mispInstance *mispv1al
 		podSpec = podSpec.WithImagePullSecrets(secrets...)
 	}
 
+	// inject tolerations if supplied
+	if len(mispInstance.Spec.Tolerations) > 0 {
+		tolerations := make([]*corev1apply.TolerationApplyConfiguration, 0, len(mispInstance.Spec.Tolerations))
+
+		for _, toleration := range mispInstance.Spec.Tolerations {
+			tolerations = append(tolerations, utils.TolerationToApplyConfiguration(toleration))
+		}
+
+		podSpec = podSpec.WithTolerations(tolerations...)
+	}
+
 	return appsv1apply.
 		Deployment(mispInstance.Name, mispInstance.Namespace).
 		WithLabels(utils.BuildAppLabels(mispInstance.Name, utils.AppLabelComponentMisp)).
@@ -777,6 +788,17 @@ func (r *MispInstanceReconciler) createModulesDeployment(mispInstance *mispv1alp
 		}
 
 		podSpec = podSpec.WithImagePullSecrets(secrets...)
+	}
+
+	// inject tolerations if supplied
+	if len(mispInstance.Spec.Tolerations) > 0 {
+		tolerations := make([]*corev1apply.TolerationApplyConfiguration, 0, len(mispInstance.Spec.Tolerations))
+
+		for _, toleration := range mispInstance.Spec.Tolerations {
+			tolerations = append(tolerations, utils.TolerationToApplyConfiguration(toleration))
+		}
+
+		podSpec = podSpec.WithTolerations(tolerations...)
 	}
 
 	return appsv1apply.

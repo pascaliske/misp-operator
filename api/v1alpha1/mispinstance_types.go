@@ -358,6 +358,11 @@ type MispInstanceSpec struct {
 	// +kubebuilder:validation:Optional
 	// +kubebuilder:default={}
 	ExtraEnvs []corev1.EnvVar `json:"extraEnvs,omitempty"`
+
+	// Optionally provide tolerations to allow the pods to schedule onto nodes with matching taints
+	// +optional
+	// +listType=atomic
+	Tolerations []corev1.Toleration `json:"tolerations,omitempty"`
 }
 
 type MispInstanceStatus struct {
