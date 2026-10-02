@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.14](https://github.com/pascaliske/misp-operator/compare/v0.0.13...v0.0.14) (2026-10-02)
+
+
+### Features
+
+* **deps:** update misp-docker to v2.5.48 ([62f0308](https://github.com/pascaliske/misp-operator/commit/62f030812e52c2dc29436daf473ac1ef47a992e9))
+* support supplying tolerations for deployments ([75f500e](https://github.com/pascaliske/misp-operator/commit/75f500ec84edfc36320ca3c8232b96841486520b))
+
+
+### Bug Fixes
+
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.2 ([624fb58](https://github.com/pascaliske/misp-operator/commit/624fb582c7280e96bd62bd374bebbfe25bc27006))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.2 ([7d9cb03](https://github.com/pascaliske/misp-operator/commit/7d9cb03d258f664aba1b6b1c7e8cf5a618d405be))
+
 ## [0.0.13](https://github.com/pascaliske/misp-operator/compare/v0.0.12...v0.0.13) (2026-09-25)
 
 
