@@ -35,7 +35,7 @@ spec:
     - from:
         - namespaceSelector: {}
       ports:
-        - port: 443
+        - port: 9443
           protocol: TCP
   policyTypes:
     - Ingress
