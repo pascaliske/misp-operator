@@ -1,5 +1,5 @@
 # --- builder stage
-FROM --platform=$BUILDPLATFORM golang:1.27.1 AS builder
+FROM --platform=$BUILDPLATFORM golang:1.27.2 AS builder
 
 # environment
 WORKDIR /workspace
