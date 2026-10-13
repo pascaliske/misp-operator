@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.0.14](https://github.com/pascaliske/misp-operator/compare/v0.0.13...v0.0.14) (2026-10-13)
+
+
+### Features
+
+* **deps:** update misp-docker ([c90ed1b](https://github.com/pascaliske/misp-operator/commit/c90ed1b5eee303aff708a7fed8ce77e62ab0aad9))
+* **deps:** update misp-docker to v2.5.48 ([62f0308](https://github.com/pascaliske/misp-operator/commit/62f030812e52c2dc29436daf473ac1ef47a992e9))
+* support supplying tolerations for deployments ([75f500e](https://github.com/pascaliske/misp-operator/commit/75f500ec84edfc36320ca3c8232b96841486520b))
+
+
+### Bug Fixes
+
+* **chart:** correctly inject ca bundle if cert-manager is enabled ([e08dd48](https://github.com/pascaliske/misp-operator/commit/e08dd489a35b153e0841e78f3ce3ae6ccc114491))
+* **crd:** make modules image optional ([d7c4151](https://github.com/pascaliske/misp-operator/commit/d7c4151f5551d99590938920e3fde8687aa941a4))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.33.1 ([46c3cd3](https://github.com/pascaliske/misp-operator/commit/46c3cd33bad9b46c66e5f2e96489b2ddc7e03526))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.2 ([624fb58](https://github.com/pascaliske/misp-operator/commit/624fb582c7280e96bd62bd374bebbfe25bc27006))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.2 ([7d9cb03](https://github.com/pascaliske/misp-operator/commit/7d9cb03d258f664aba1b6b1c7e8cf5a618d405be))
+* use correct webhook port in webhook ingress network policies ([131553f](https://github.com/pascaliske/misp-operator/commit/131553f696466f175ef8ff54f409bd00a03cd099))
+
 ## [0.0.13](https://github.com/pascaliske/misp-operator/compare/v0.0.12...v0.0.13) (2026-09-25)
 
 
