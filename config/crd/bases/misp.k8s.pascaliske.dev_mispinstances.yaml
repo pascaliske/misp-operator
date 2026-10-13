@@ -379,10 +379,7 @@ spec:
                     type: boolean
                   image:
                     description: Override the modules image - defaults to ghcr.io/misp/misp-docker/misp-modules
-                    minLength: 1
                     type: string
-                required:
-                - image
                 type: object
               nginx:
                 description: Optional nginx configuration

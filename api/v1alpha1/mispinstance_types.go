@@ -278,7 +278,7 @@ type Modules struct {
 
 	// Override the modules image - defaults to ghcr.io/misp/misp-docker/misp-modules
 	// +kubebuilder:validation:Type=string
-	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:Optional
 	Image string `json:"image"`
 }
 
