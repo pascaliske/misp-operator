@@ -32,9 +32,7 @@ spec:
     matchLabels:
       {{- include "misp-operator.selectorLabels" . | nindent 6 }}
   ingress:
-    - from:
-        - namespaceSelector: {}
-      ports:
+    - ports:
         - port: 9443
           protocol: TCP
   policyTypes:
