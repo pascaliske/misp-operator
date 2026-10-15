@@ -273,7 +273,7 @@ type Email struct {
 type Modules struct {
 	// Enable optional modules component
 	// +kubebuilder:validation:Type=boolean
-	// +kubebuilder:default=true
+	// +kubebuilder:default=false
 	Enabled bool `json:"enabled,omitempty"`
 
 	// Override the modules image - defaults to ghcr.io/misp/misp-docker/misp-modules
