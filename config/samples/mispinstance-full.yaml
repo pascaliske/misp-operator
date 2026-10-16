@@ -96,6 +96,10 @@ spec:
     enabled: true
     image: ghcr.io/misp/misp-docker/misp-modules:v3.0.9
 
+  # provide trusted ca certificates
+  # trustedCAs:
+  #   - name: my-custom-ca
+
   # additional env vars
   extraEnvs:
     - name: PYTHONUNBUFFERED
