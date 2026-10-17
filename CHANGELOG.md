@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.15](https://github.com/pascaliske/misp-operator/compare/v0.0.14...v0.0.15) (2026-10-17)
+
+
+### Features
+
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.0.12 ([927253e](https://github.com/pascaliske/misp-operator/commit/927253e5e1156ffc5d59b142798c8fb260fccada))
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.0.12 ([677c8f5](https://github.com/pascaliske/misp-operator/commit/677c8f5a84d224dc516743e9cd2079dabde9071e))
+* support trusting additional ca certificates ([9d659a5](https://github.com/pascaliske/misp-operator/commit/9d659a55a030cbd4d1bc3542d91b6a45d2c20235))
+* support trusting additional ca certificates ([839cb67](https://github.com/pascaliske/misp-operator/commit/839cb671207f2356669cd51560bf692c9d0c18cb))
+
+
+### Bug Fixes
+
+* **crd:** misp modules container should be explicitly enabled ([97cd75b](https://github.com/pascaliske/misp-operator/commit/97cd75b03c223264d4c9e77fdcac5d23610e2a6c))
+
 ## [0.0.14](https://github.com/pascaliske/misp-operator/compare/v0.0.13...v0.0.14) (2026-10-13)
 
 
