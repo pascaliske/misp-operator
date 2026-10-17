@@ -223,6 +223,11 @@ func (in *MispInstanceSpec) DeepCopyInto(out *MispInstanceSpec) {
 		*out = new(Modules)
 		**out = **in
 	}
+	if in.TrustedCAs != nil {
+		in, out := &in.TrustedCAs, &out.TrustedCAs
+		*out = make([]v1.LocalObjectReference, len(*in))
+		copy(*out, *in)
+	}
 	if in.ExtraEnvs != nil {
 		in, out := &in.ExtraEnvs, &out.ExtraEnvs
 		*out = make([]v1.EnvVar, len(*in))

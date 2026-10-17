@@ -354,6 +354,10 @@ type MispInstanceSpec struct {
 	// +kubebuilder:validation:Optional
 	Modules *Modules `json:"modules"`
 
+	// +kubebuilder:validation:Optional
+	// +kubebuilder:default={}
+	TrustedCAs []corev1.LocalObjectReference `json:"trustedCAs,omitempty"`
+
 	// Provide extra environment variables for the core container
 	// +kubebuilder:validation:Optional
 	// +kubebuilder:default={}

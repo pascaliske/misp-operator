@@ -348,32 +348,47 @@ func (r *MispInstanceReconciler) createCoreContainer(mispInstance *mispv1alpha1.
 		}
 	}
 
+	coreVolumeMounts := []*corev1apply.VolumeMountApplyConfiguration{
+		corev1apply.
+			VolumeMount().
+			WithName("misp-storage").
+			WithMountPath("/var/www/MISP/.gnupg").
+			WithSubPath("gnupg"),
+		corev1apply.
+			VolumeMount().
+			WithName("misp-storage").
+			WithMountPath("/var/www/MISP/app/files").
+			WithSubPath("files"),
+		corev1apply.
+			VolumeMount().
+			WithName("misp-configs").
+			WithMountPath("/var/www/MISP/app/Config"),
+		corev1apply.
+			VolumeMount().
+			WithName("misp-logs").
+			WithMountPath("/var/www/MISP/app/tmp/logs"),
+	}
+
+	// inject trusted ca certificates
+	if len(mispInstance.Spec.TrustedCAs) > 0 {
+		for i := range mispInstance.Spec.TrustedCAs {
+			coreVolumeMounts = append(coreVolumeMounts,
+				corev1apply.
+					VolumeMount().
+					WithName(fmt.Sprintf("trusted-ca-%d", i)).
+					WithMountPath("/usr/local/share/ca-certificates").
+					WithReadOnly(true),
+			)
+		}
+	}
+
 	return corev1apply.
 		Container().
 		WithName("misp-core").
 		WithImage(mispInstance.GetCoreImage()).
 		WithImagePullPolicy(utils.Try(mispInstance.Spec.ImagePullPolicy, corev1.PullIfNotPresent)).
 		WithEnv(coreEnv...).
-		WithVolumeMounts(
-			corev1apply.
-				VolumeMount().
-				WithName("misp-storage").
-				WithMountPath("/var/www/MISP/.gnupg").
-				WithSubPath("gnupg"),
-			corev1apply.
-				VolumeMount().
-				WithName("misp-storage").
-				WithMountPath("/var/www/MISP/app/files").
-				WithSubPath("files"),
-			corev1apply.
-				VolumeMount().
-				WithName("misp-configs").
-				WithMountPath("/var/www/MISP/app/Config"),
-			corev1apply.
-				VolumeMount().
-				WithName("misp-logs").
-				WithMountPath("/var/www/MISP/app/tmp/logs"),
-		).
+		WithVolumeMounts(coreVolumeMounts...).
 		WithSecurityContext(
 			corev1apply.
 				SecurityContext().
@@ -666,6 +681,61 @@ func (r *MispInstanceReconciler) createModulesContainer(mispInstance *mispv1alph
 }
 
 func (r *MispInstanceReconciler) createInstanceDeployment(mispInstance *mispv1alpha1.MispInstance) *appsv1apply.DeploymentApplyConfiguration {
+	volumes := []*corev1apply.VolumeApplyConfiguration{
+		corev1apply.
+			Volume().
+			WithName("misp-storage").
+			WithPersistentVolumeClaim(
+				corev1apply.PersistentVolumeClaimVolumeSource().WithClaimName(mispInstance.GetNameWithSuffix("storage")),
+			),
+		corev1apply.
+			Volume().
+			WithName("misp-configs").
+			WithEmptyDir(
+				corev1apply.EmptyDirVolumeSource(),
+			),
+		corev1apply.
+			Volume().
+			WithName("misp-logs").
+			WithEmptyDir(
+				corev1apply.EmptyDirVolumeSource(),
+			),
+		corev1apply.
+			Volume().
+			WithName("nginx-config").
+			WithEmptyDir(
+				corev1apply.EmptyDirVolumeSource(),
+			),
+		corev1apply.
+			Volume().
+			WithName("nginx-cache").
+			WithEmptyDir(
+				corev1apply.EmptyDirVolumeSource(),
+			),
+		corev1apply.
+			Volume().
+			WithName("nginx-tmp").
+			WithEmptyDir(
+				corev1apply.EmptyDirVolumeSource(),
+			),
+	}
+
+	// inject trusted ca certificates
+	if len(mispInstance.Spec.TrustedCAs) > 0 {
+		for i, c := range mispInstance.Spec.TrustedCAs {
+			volumes = append(volumes,
+				corev1apply.
+					Volume().
+					WithName(fmt.Sprintf("trusted-ca-%d", i)).
+					WithSecret(
+						corev1apply.
+							SecretVolumeSource().
+							WithSecretName(c.Name),
+					),
+			)
+		}
+	}
+
 	podSpec := corev1apply.
 		PodSpec().
 		WithServiceAccountName(mispInstance.GetName()).
@@ -678,44 +748,7 @@ func (r *MispInstanceReconciler) createInstanceDeployment(mispInstance *mispv1al
 				PodSecurityContext().
 				WithFSGroup(33),
 		).
-		WithVolumes(
-			corev1apply.
-				Volume().
-				WithName("misp-storage").
-				WithPersistentVolumeClaim(
-					corev1apply.PersistentVolumeClaimVolumeSource().WithClaimName(mispInstance.GetNameWithSuffix("storage")),
-				),
-			corev1apply.
-				Volume().
-				WithName("misp-configs").
-				WithEmptyDir(
-					corev1apply.EmptyDirVolumeSource(),
-				),
-			corev1apply.
-				Volume().
-				WithName("misp-logs").
-				WithEmptyDir(
-					corev1apply.EmptyDirVolumeSource(),
-				),
-			corev1apply.
-				Volume().
-				WithName("nginx-config").
-				WithEmptyDir(
-					corev1apply.EmptyDirVolumeSource(),
-				),
-			corev1apply.
-				Volume().
-				WithName("nginx-cache").
-				WithEmptyDir(
-					corev1apply.EmptyDirVolumeSource(),
-				),
-			corev1apply.
-				Volume().
-				WithName("nginx-tmp").
-				WithEmptyDir(
-					corev1apply.EmptyDirVolumeSource(),
-				),
-		)
+		WithVolumes(volumes...)
 
 	// inject image pull secrets if supplied
 	if len(mispInstance.Spec.ImagePullSecrets) > 0 {
