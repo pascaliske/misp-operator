@@ -22,4 +22,13 @@ resources:
     defaulting: true
     validation: true
     webhookVersion: v1
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: k8s.pascaliske.dev
+  group: misp
+  kind: MispSyncConfig
+  path: github.com/pascaliske/misp-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"
