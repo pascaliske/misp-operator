@@ -375,6 +375,34 @@ spec:
               modules:
                 description: Optional modules component
                 properties:
+                  custom:
+                    description: Provide optional custom modules
+                    properties:
+                      action:
+                        default: []
+                        description: List of action modules as image references
+                        items:
+                          type: string
+                        type: array
+                      expansion:
+                        default: []
+                        description: List of expansion modules as image references
+                        items:
+                          type: string
+                        type: array
+                      export:
+                        default: []
+                        description: List of export modules as image references
+                        items:
+                          type: string
+                        type: array
+                      import:
+                        default: []
+                        description: List of import modules as image references
+                        items:
+                          type: string
+                        type: array
+                    type: object
                   enabled:
                     default: false
                     description: Enable optional modules component
