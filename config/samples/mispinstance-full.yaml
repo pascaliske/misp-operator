@@ -95,6 +95,15 @@ spec:
   modules:
     enabled: true
     image: ghcr.io/misp/misp-docker/misp-modules:v3.0.9
+    # custom:
+    #   expansion: []
+    #     # - ghcr.io/my-user/my-misp-modules/expansion-demo:latest
+    #   export: []
+    #     # - ghcr.io/my-user/my-misp-modules/export-demo:latest
+    #   import: []
+    #     # - ghcr.io/my-user/my-misp-modules/import-demo:latest
+    #   action: []
+    #     # - ghcr.io/my-user/my-misp-modules/action-demo:latest
 
   # provide trusted ca certificates
   # trustedCAs:

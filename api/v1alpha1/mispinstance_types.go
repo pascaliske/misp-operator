@@ -270,6 +270,24 @@ type Email struct {
 	Smtp *Smtp `json:"smtp,omitempty"`
 }
 
+type Custom struct {
+	// List of expansion modules as image references
+	// +kubebuilder:default={}
+	Expansion []string `json:"expansion,omitempty"`
+
+	// List of export modules as image references
+	// +kubebuilder:default={}
+	Export []string `json:"export,omitempty"`
+
+	// List of import modules as image references
+	// +kubebuilder:default={}
+	Import []string `json:"import,omitempty"`
+
+	// List of action modules as image references
+	// +kubebuilder:default={}
+	Action []string `json:"action,omitempty"`
+}
+
 type Modules struct {
 	// Enable optional modules component
 	// +kubebuilder:validation:Type=boolean
@@ -280,6 +298,10 @@ type Modules struct {
 	// +kubebuilder:validation:Type=string
 	// +kubebuilder:validation:Optional
 	Image string `json:"image"`
+
+	// Provide optional custom modules
+	// +kubebuilder:validation:Optional
+	Custom *Custom `json:"custom,omitempty"`
 }
 
 type MispInstanceSpec struct {

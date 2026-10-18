@@ -635,6 +635,56 @@ func (r *MispInstanceReconciler) createNginxContainer(mispInstance *mispv1alpha1
 }
 
 func (r *MispInstanceReconciler) createModulesContainer(mispInstance *mispv1alpha1.MispInstance) *corev1apply.ContainerApplyConfiguration {
+	modulesVolumeMounts := []*corev1apply.VolumeMountApplyConfiguration{}
+
+	// inject custom expansion modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Expansion) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Expansion {
+			modulesVolumeMounts = append(modulesVolumeMounts,
+				corev1apply.
+					VolumeMount().
+					WithName(fmt.Sprintf("custom-expansion-modules-%d", i)).
+					WithMountPath(fmt.Sprintf("/custom/expansion/%s", utils.ModuleNameFromImage(m))),
+			)
+		}
+	}
+
+	// inject custom export modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Export) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Export {
+			modulesVolumeMounts = append(modulesVolumeMounts,
+				corev1apply.
+					VolumeMount().
+					WithName(fmt.Sprintf("custom-export-modules-%d", i)).
+					WithMountPath(fmt.Sprintf("/custom/export_mod/%s", utils.ModuleNameFromImage(m))),
+			)
+		}
+	}
+
+	// inject custom import modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Import) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Import {
+			modulesVolumeMounts = append(modulesVolumeMounts,
+				corev1apply.
+					VolumeMount().
+					WithName(fmt.Sprintf("custom-import-modules-%d", i)).
+					WithMountPath(fmt.Sprintf("/custom/import_mod/%s", utils.ModuleNameFromImage(m))),
+			)
+		}
+	}
+
+	// inject custom action modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Action) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Action {
+			modulesVolumeMounts = append(modulesVolumeMounts,
+				corev1apply.
+					VolumeMount().
+					WithName(fmt.Sprintf("custom-action-modules-%d", i)).
+					WithMountPath(fmt.Sprintf("/custom/action_mod/%s", utils.ModuleNameFromImage(m))),
+			)
+		}
+	}
+
 	return corev1apply.
 		Container().
 		WithName("misp-modules").
@@ -652,6 +702,7 @@ func (r *MispInstanceReconciler) createModulesContainer(mispInstance *mispv1alph
 				WithName("TZ").
 				WithValue(mispInstance.Spec.TimeZone),
 		).
+		WithVolumeMounts(modulesVolumeMounts...).
 		WithReadinessProbe(
 			corev1apply.
 				Probe().
@@ -800,6 +851,72 @@ func (r *MispInstanceReconciler) createInstanceDeployment(mispInstance *mispv1al
 }
 
 func (r *MispInstanceReconciler) createModulesDeployment(mispInstance *mispv1alpha1.MispInstance) *appsv1apply.DeploymentApplyConfiguration {
+	volumes := []*corev1apply.VolumeApplyConfiguration{}
+
+	// inject custom expansion modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Expansion) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Expansion {
+			volumes = append(volumes,
+				corev1apply.
+					Volume().
+					WithName(fmt.Sprintf("custom-expansion-modules-%d", i)).
+					WithImage(
+						corev1apply.
+							ImageVolumeSource().
+							WithReference(m),
+					),
+			)
+		}
+	}
+
+	// inject custom export modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Export) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Export {
+			volumes = append(volumes,
+				corev1apply.
+					Volume().
+					WithName(fmt.Sprintf("custom-export-modules-%d", i)).
+					WithImage(
+						corev1apply.
+							ImageVolumeSource().
+							WithReference(m),
+					),
+			)
+		}
+	}
+
+	// inject custom import modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Import) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Import {
+			volumes = append(volumes,
+				corev1apply.
+					Volume().
+					WithName(fmt.Sprintf("custom-import-modules-%d", i)).
+					WithImage(
+						corev1apply.
+							ImageVolumeSource().
+							WithReference(m),
+					),
+			)
+		}
+	}
+
+	// inject custom action modules
+	if mispInstance.Spec.Modules.Custom != nil && len(mispInstance.Spec.Modules.Custom.Action) > 0 {
+		for i, m := range mispInstance.Spec.Modules.Custom.Action {
+			volumes = append(volumes,
+				corev1apply.
+					Volume().
+					WithName(fmt.Sprintf("custom-action-modules-%d", i)).
+					WithImage(
+						corev1apply.
+							ImageVolumeSource().
+							WithReference(m),
+					),
+			)
+		}
+	}
+
 	podSpec := corev1apply.
 		PodSpec().
 		WithServiceAccountName(mispInstance.GetNameWithSuffix("modules")).
@@ -810,7 +927,8 @@ func (r *MispInstanceReconciler) createModulesDeployment(mispInstance *mispv1alp
 			corev1apply.
 				PodSecurityContext().
 				WithFSGroup(33),
-		)
+		).
+		WithVolumes(volumes...)
 
 	// inject image pull secrets if supplied
 	if len(mispInstance.Spec.ImagePullSecrets) > 0 {
