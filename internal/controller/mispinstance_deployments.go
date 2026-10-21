@@ -29,7 +29,9 @@ import (
 
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/resource"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	appsv1apply "k8s.io/client-go/applyconfigurations/apps/v1"
 	corev1apply "k8s.io/client-go/applyconfigurations/core/v1"
@@ -988,6 +990,17 @@ func (r *MispInstanceReconciler) reconcileDeployments(ctx context.Context, mispI
 	// reconcile misp modules deployment if enabled
 	if mispInstance.Spec.Modules != nil && mispInstance.Spec.Modules.Enabled {
 		if err := r.Apply(ctx, r.createModulesDeployment(mispInstance), options); err != nil {
+			return err
+		}
+	} else {
+		deployment := &appsv1.Deployment{
+			ObjectMeta: metav1.ObjectMeta{
+				Name:      mispInstance.GetNameWithSuffix("modules"),
+				Namespace: mispInstance.Namespace,
+			},
+		}
+
+		if err := r.Delete(ctx, deployment); err != nil && !errors.IsNotFound(err) {
 			return err
 		}
 	}

@@ -63,7 +63,7 @@ func NewMispInstanceReconciler(mgr manager.Manager) *MispInstanceReconciler {
 // +kubebuilder:rbac:groups="",resources=secrets,verbs=get;list;watch;create;update;patch
 // +kubebuilder:rbac:groups="",resources=serviceaccounts,verbs=get;list;watch;create;update;patch
 // +kubebuilder:rbac:groups="",resources=services,verbs=get;list;watch;create;update;patch
-// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch
+// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=events.k8s.io,resources=events,verbs=create;patch
 // +kubebuilder:rbac:groups=misp.k8s.pascaliske.dev,resources=mispinstances,verbs=get;list;watch;create;update;patch;delete
 // +kubebuilder:rbac:groups=misp.k8s.pascaliske.dev,resources=mispinstances/finalizers,verbs=update
