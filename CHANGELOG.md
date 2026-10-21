@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.0.15](https://github.com/pascaliske/misp-operator/compare/v0.0.14...v0.0.15) (2026-10-21)
+
+
+### Features
+
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.0.12 ([927253e](https://github.com/pascaliske/misp-operator/commit/927253e5e1156ffc5d59b142798c8fb260fccada))
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.0.12 ([677c8f5](https://github.com/pascaliske/misp-operator/commit/677c8f5a84d224dc516743e9cd2079dabde9071e))
+* support providing custom modules ([9eae2e7](https://github.com/pascaliske/misp-operator/commit/9eae2e799eefc203e583534488b64fc6af3f1a2d))
+* support providing custom modules ([43c88b0](https://github.com/pascaliske/misp-operator/commit/43c88b0a72846b8affbcae2f94867797467ed7ba))
+* support trusting additional ca certificates ([9d659a5](https://github.com/pascaliske/misp-operator/commit/9d659a55a030cbd4d1bc3542d91b6a45d2c20235))
+* support trusting additional ca certificates ([839cb67](https://github.com/pascaliske/misp-operator/commit/839cb671207f2356669cd51560bf692c9d0c18cb))
+
+
+### Bug Fixes
+
+* clean-up modules deployment if disabled afterwards ([7380635](https://github.com/pascaliske/misp-operator/commit/73806351f4b30c170b6cb2d31c8ccf2175a14ea1))
+* **crd:** misp modules container should be explicitly enabled ([97cd75b](https://github.com/pascaliske/misp-operator/commit/97cd75b03c223264d4c9e77fdcac5d23610e2a6c))
+* remove from section from webhook network policies ([84c6654](https://github.com/pascaliske/misp-operator/commit/84c6654679af37aa9b04d8c7d2b68cb3f1b14c34))
+* remove mandatory label namespace selector from metric network policies ([0a89f3c](https://github.com/pascaliske/misp-operator/commit/0a89f3cf521557ba42708338635db2061a123e15))
+
 ## [0.0.14](https://github.com/pascaliske/misp-operator/compare/v0.0.13...v0.0.14) (2026-10-13)
 
 
