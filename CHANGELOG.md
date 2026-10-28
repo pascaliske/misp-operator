@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.16](https://github.com/pascaliske/misp-operator/compare/v0.0.15...v0.0.16) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deps:** update kubernetes monorepo to v0.37.2 ([31247d2](https://github.com/pascaliske/misp-operator/commit/31247d2e340e124274bef3f6b33189b116839f21))
+* **deps:** update kubernetes monorepo to v0.37.2 ([17ace76](https://github.com/pascaliske/misp-operator/commit/17ace76168145aeb5362310ac9bf6028c3b59094))
+
 ## [0.0.15](https://github.com/pascaliske/misp-operator/compare/v0.0.14...v0.0.15) (2026-10-25)
 
 
