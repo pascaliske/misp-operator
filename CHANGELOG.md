@@ -1,5 +1,27 @@
 # Changelog
 
+## [0.0.16](https://github.com/pascaliske/misp-operator/compare/v0.0.15...v0.0.16) (2026-11-18)
+
+
+### Features
+
+* **chart:** support pinning image digest of controller ([9cfa634](https://github.com/pascaliske/misp-operator/commit/9cfa6347b9832fd56496d858171b058b43468d30))
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.1.3 ([8634bd0](https://github.com/pascaliske/misp-operator/commit/8634bd038f5968eaf1d19ac5e4c0ac9ab1b4c45d))
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.1.3 ([ea28c28](https://github.com/pascaliske/misp-operator/commit/ea28c284f86526fd4608d61a3971d5c5fd9562c6))
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.1.5 ([3e67182](https://github.com/pascaliske/misp-operator/commit/3e671824816c3ceb178d605df6c5e088e76d2bf1))
+* **deps:** update ghcr.io/misp/misp-docker/misp-modules docker tag to v3.1.5 ([3e946f2](https://github.com/pascaliske/misp-operator/commit/3e946f24c9c422d64bbe965c6c3073c6421117f8))
+* **deps:** update misp-docker ([188e078](https://github.com/pascaliske/misp-operator/commit/188e0780f6f783dff71754b18f1383ecc579dc0f))
+
+
+### Bug Fixes
+
+* **chart:** ensure default value for controller image pull policy ([5836bc8](https://github.com/pascaliske/misp-operator/commit/5836bc807735f56d405010d8d27cb701fb94e460))
+* **deps:** update kubernetes monorepo to v0.37.2 ([31247d2](https://github.com/pascaliske/misp-operator/commit/31247d2e340e124274bef3f6b33189b116839f21))
+* **deps:** update kubernetes monorepo to v0.37.2 ([17ace76](https://github.com/pascaliske/misp-operator/commit/17ace76168145aeb5362310ac9bf6028c3b59094))
+* **deps:** update module github.com/onsi/ginkgo/v2 to v2.34.0 ([c4ba94c](https://github.com/pascaliske/misp-operator/commit/c4ba94cb20759407e3dfc5b0d3c51a3889f4d658))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.3 ([a3bdd01](https://github.com/pascaliske/misp-operator/commit/a3bdd01b1eeceff07a63105bdae9c51af7433fc1))
+* **deps:** update module sigs.k8s.io/controller-runtime to v0.25.3 ([2efa489](https://github.com/pascaliske/misp-operator/commit/2efa48915473fa24eec89439a7e0d7537b491c75))
+
 ## [0.0.15](https://github.com/pascaliske/misp-operator/compare/v0.0.14...v0.0.15) (2026-10-25)
 
 
