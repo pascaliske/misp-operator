@@ -24,11 +24,33 @@ linters:
     - unparam
     - unused
     - logcheck
+    - kubeapilinter
   settings:
     custom:
       logcheck:
         type: "module"
         description: Checks Go logging calls for Kubernetes logging conventions.
+      kubeapilinter:
+        type: "module"
+        description: "Kube API Linter plugin"
+        original-url: "sigs.k8s.io/kube-api-linter"
+        settings:
+          linters:
+            disable:
+              - commentstart
+          lintersConfig:
+            conditions:
+              isFirstField: Ignore
+              useProtobuf: Forbid
+              usePatchStrategy: Forbid
+            defaults:
+              preferredDefaultMarker: kubebuilder:default
+            optionalfields:
+              pointers:
+                preference: WhenRequired
+            optionalorrequired:
+              preferredOptionalMarker: optional
+              preferredRequiredMarker: required
     depguard:
       rules:
         forbid-sort-pkg:
@@ -53,6 +75,9 @@ linters:
           - dupl
           - lll
         path: internal/*
+      - linters:
+          - kubeapilinter
+        path-except: api/*
     paths:
       - third_party$
       - builtin$
