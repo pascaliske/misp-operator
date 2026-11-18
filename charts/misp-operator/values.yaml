@@ -7,6 +7,8 @@ image:
   # -- The image tag, if left empty chart's appVersion will be used.
   # @default -- `.Chart.AppVersion`
   tag: ''
+  # -- Pin the image by digest (sha256). When set it takes precedence over tag.
+  digest: ''
   # -- The pull policy for the controller.
   pullPolicy: IfNotPresent
 

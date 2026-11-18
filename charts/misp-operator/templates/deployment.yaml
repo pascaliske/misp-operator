@@ -41,7 +41,7 @@ spec:
       serviceAccountName: {{ include "misp-operator.serviceAccountName" . }}
       containers:
         - name: manager
-          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          image: {{ include "misp-operator.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy | default "IfNotPresent" }}
           command:
             - /manager

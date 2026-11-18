@@ -71,3 +71,14 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the image name
+*/}}
+{{- define "misp-operator.image" -}}
+{{- if .Values.image.digest -}}
+{{- printf "%s/%s@%s" .Values.image.registry .Values.image.repository .Values.image.digest -}}
+{{- else -}}
+{{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) -}}
+{{- end -}}
+{{- end }}
