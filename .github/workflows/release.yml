@@ -20,6 +20,8 @@ jobs:
       contents: read
       packages: write
       id-token: write
+    outputs:
+      image-digest: ${{ steps.build.outputs.digest }}
     steps:
       - name: Prepare version
         id: version
@@ -119,8 +121,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Package Helm Chart
+        env:
+          DIGEST: ${{ needs.image.outputs.image-digest }}
         run: |
           make helm-generate-files
+          yq -i '.image.digest = strenv(DIGEST)' charts/misp-operator/values.yaml
           helm package charts/misp-operator --version "${{ steps.version.outputs.version }}" --app-version "${{ steps.version.outputs.version }}"
 
       - name: Push Helm Chart
