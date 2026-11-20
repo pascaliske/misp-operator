@@ -22,6 +22,9 @@ resources:
 # default, aiding admins in cluster management. Those roles are
 # not used by the misp-operator itself. You can comment the following lines
 # if you do not want those helpers be installed with your Project.
+- mispsyncconfig_admin_role.yaml
+- mispsyncconfig_editor_role.yaml
+- mispsyncconfig_viewer_role.yaml
 - mispinstance_admin_role.yaml
 - mispinstance_editor_role.yaml
 - mispinstance_viewer_role.yaml

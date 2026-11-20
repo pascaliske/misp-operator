@@ -42,6 +42,7 @@ rules:
   - misp.k8s.pascaliske.dev
   resources:
   - mispinstances
+  - mispsyncconfigs
   verbs:
   - create
   - delete
@@ -54,12 +55,14 @@ rules:
   - misp.k8s.pascaliske.dev
   resources:
   - mispinstances/finalizers
+  - mispsyncconfigs/finalizers
   verbs:
   - update
 - apiGroups:
   - misp.k8s.pascaliske.dev
   resources:
   - mispinstances/status
+  - mispsyncconfigs/status
   verbs:
   - get
   - patch
