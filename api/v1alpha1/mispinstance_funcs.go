@@ -24,13 +24,13 @@ import (
 )
 
 // renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-core
-const mispInstanceCoreImageDefault = "ghcr.io/misp/misp-docker/misp-core:v2.5.52"
+const mispInstanceCoreImageDefault = "ghcr.io/misp/misp-docker/misp-core:v2.5.53"
 
 // renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-nginx
-const mispInstanceNginxImageDefault = "ghcr.io/misp/misp-docker/misp-nginx:v2.5.52"
+const mispInstanceNginxImageDefault = "ghcr.io/misp/misp-docker/misp-nginx:v2.5.53"
 
 // renovate: datasource=docker image=ghcr.io/misp/misp-docker/misp-modules
-const mispInstanceModulesImageDefault = "ghcr.io/misp/misp-docker/misp-modules:v3.1.5"
+const mispInstanceModulesImageDefault = "ghcr.io/misp/misp-docker/misp-modules:v3.1.6"
 
 // Returns the custom misp-core image if set or the default misp-core image as fallback
 func (mispInstance *MispInstance) GetCoreImage() string {
