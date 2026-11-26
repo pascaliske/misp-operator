@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.17](https://github.com/pascaliske/misp-operator/compare/v0.0.16...v0.0.17) (2026-11-26)
+
+
+### Features
+
+* **deps:** update misp-docker ([2bc590b](https://github.com/pascaliske/misp-operator/commit/2bc590bcdcdefc4eebe639d2cbe263e844c19cbe))
+* **deps:** update misp-docker to v2.5.52 ([59a5dbb](https://github.com/pascaliske/misp-operator/commit/59a5dbb3c2c2cc2e1b80127daf460be462a70369))
+* **deps:** update misp-docker to v2.5.52 ([1664087](https://github.com/pascaliske/misp-operator/commit/1664087bf598cbf7e9f4f21d82affd32eabe7610))
+
+
+### Bug Fixes
+
+* **deps:** update kubernetes monorepo to v0.37.3 ([49edc0d](https://github.com/pascaliske/misp-operator/commit/49edc0dfc86c281b252e26e3a1eb9d737a5e9919))
+
 ## [0.0.16](https://github.com/pascaliske/misp-operator/compare/v0.0.15...v0.0.16) (2026-11-18)
 
 
